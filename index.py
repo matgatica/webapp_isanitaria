@@ -1,9 +1,17 @@
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
-
+import dash_auth
 from app import app, server
 from apps import app1, app2
+
+VALID_USERNAME_PASSWORD_PAIRS = {
+    'isanitaria': 'Seremi1025'
+}
+auth = dash_auth.BasicAuth(
+    app,
+    VALID_USERNAME_PASSWORD_PAIRS
+)
 
 
 app.layout = html.Div([
