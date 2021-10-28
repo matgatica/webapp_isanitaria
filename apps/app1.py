@@ -10,6 +10,8 @@ from datetime import date
 
 df_inv = pd.read_csv('DATA/CASOS_INV.csv',dtype=str,sep=";")
 df_inv["_id.dia_seg"]=pd.to_datetime(df_inv["_id.dia_seg"],format="%d-%m-%Y")
+df_inv["count"]=df_inv["count"].astype(int)
+df_inv.sort_values(by="_id.dia_seg",inplace=True)
 
 #available_indicators = df['Indicator Name'].unique()
 
@@ -74,11 +76,13 @@ def update_graph(#xaxis_column_name, yaxis_column_name,
     df=df_inv            
     dff = df[(df['_id.dia_seg'] >= startdate) & (df['_id.dia_seg'] <= enddate)]
 
-    fig = px.scatter(data_frame=dff,x="_id.dia_seg",
-                     y=[dff["count"]])
+    fig2 = px.scatter(data_frame=dff,x=dff["_id.dia_seg"],
+                     y=dff["count"])
                      #hover_name="CASOS INVESTIGACION")
 
-    fig.update_layout(margin={'l': 40, 'b': 40, 't': 10, 'r': 0}, hovermode='closest')
+    fig2.update_layout(margin={'l': 40, 'b': 40, 't': 10, 'r': 0}, hovermode='closest')
+    
+                    
 
     # fig.update_xaxes(title=xaxis_column_name
     #                 )
@@ -86,7 +90,7 @@ def update_graph(#xaxis_column_name, yaxis_column_name,
     # fig.update_yaxes(title=yaxis_column_name
     #                 )
 
-    return fig
+    return fig2
 
 
 @app.callback(
@@ -105,16 +109,16 @@ def update_graph_2(#xaxis_column_name, yaxis_column_name,
     df=df_inv            
     dff = df[(df['_id.dia_seg'] >= startdate) & (df['_id.dia_seg'] <= enddate)]
 
-    fig = px.scatter(data_frame=dff,x="_id.dia_seg",
+    fig1 = px.scatter(data_frame=dff,x=dff["_id.dia_seg"],
                      y=[dff["count"]])
                      #hover_name="CASOS INVESTIGACION")
 
-    fig.update_layout(margin={'l': 40, 'b': 40, 't': 10, 'r': 0}, hovermode='closest')
-
+    fig1.update_layout(margin={'l': 40, 'b': 40, 't': 10, 'r': 0}, hovermode='closest')
+    
     # fig.update_xaxes(title=xaxis_column_name
     #                 )
 
     # fig.update_yaxes(title=yaxis_column_name
     #                 )
 
-    return fig
+    return fig1
