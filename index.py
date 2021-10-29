@@ -28,7 +28,7 @@ def display_page(pathname):
     elif pathname == '/apps/app2':
         return app2.layout
     else:
-        return '404'
+        return app1.layout
 
 if __name__ == '__main__':
     app.run_server(debug=True)
