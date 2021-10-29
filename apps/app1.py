@@ -13,28 +13,9 @@ df_inv["_id.dia_seg"]=pd.to_datetime(df_inv["_id.dia_seg"],format="%d-%m-%Y")
 df_inv["count"]=df_inv["count"].astype(int)
 df_inv.sort_values(by="_id.dia_seg",inplace=True)
 
-#available_indicators = df['Indicator Name'].unique()
 
 layout = html.Div([
     html.H1(children='Casos Investigación'),
-    # html.Div([
-    #     html.Div([
-    #         dcc.Dropdown(
-    #             id='xaxis-column',
-    #             options=[{'label': i, 'value': i} for i in available_indicators],
-    #             value='Fertility rate, total (births per woman)'
-    #         ),
-    #        
-    #     ], style={'width': '48%', 'display': 'inline-block'}),
-    #     html.Div([
-    #         dcc.Dropdown(
-    #             id='yaxis-column',
-    #             options=[{'label': i, 'value': i} for i in available_indicators],
-    #             value='Life expectancy at birth, total (years)'
-    #         ),
-    #      
-    #     ], style={'width': '48%', 'float': 'right', 'display': 'inline-block'})
-    # ]),
 
     dcc.Graph(id='indicator-graphic'),
 
@@ -63,40 +44,31 @@ layout = html.Div([
 
 @app.callback(
     Output('indicator-graphic', 'figure'),
-    
-    # Input('xaxis-column', 'value'),
-    # Input('yaxis-column', 'value'),
+
     [Input('my-date-picker-range', 'start_date'),
     Input('my-date-picker-range', 'end_date'),
     ]
 )
 
-def update_graph(#xaxis_column_name, yaxis_column_name,
+def update_graph(
                  startdate,enddate):
     df=df_inv            
     dff = df[(df['_id.dia_seg'] >= startdate) & (df['_id.dia_seg'] <= enddate)]
 
     fig2 = px.scatter(data_frame=dff,x=dff["_id.dia_seg"],
                      y=dff["count"])
-                     #hover_name="CASOS INVESTIGACION")
+
 
     fig2.update_layout(margin={'l': 40, 'b': 40, 't': 10, 'r': 0}, hovermode='closest')
     
                     
-
-    # fig.update_xaxes(title=xaxis_column_name
-    #                 )
-
-    # fig.update_yaxes(title=yaxis_column_name
-    #                 )
 
     return fig2
 
 
 @app.callback(
     Output('indicator-graphic_2', 'figure'),
-    # Input('xaxis-column', 'value'),
-    # Input('yaxis-column', 'value'),
+
     [
     Input('my-date-picker-range_2', 'start_date'),
     Input('my-date-picker-range_2', 'end_date'),
@@ -104,21 +76,14 @@ def update_graph(#xaxis_column_name, yaxis_column_name,
 )
 
 
-def update_graph_2(#xaxis_column_name, yaxis_column_name,
+def update_graph_2(
                  startdate,enddate):
     df=df_inv            
     dff = df[(df['_id.dia_seg'] >= startdate) & (df['_id.dia_seg'] <= enddate)]
 
     fig1 = px.scatter(data_frame=dff,x=dff["_id.dia_seg"],
                      y=[dff["count"]])
-                     #hover_name="CASOS INVESTIGACION")
 
     fig1.update_layout(margin={'l': 40, 'b': 40, 't': 10, 'r': 0}, hovermode='closest')
-    
-    # fig.update_xaxes(title=xaxis_column_name
-    #                 )
-
-    # fig.update_yaxes(title=yaxis_column_name
-    #                 )
 
     return fig1
