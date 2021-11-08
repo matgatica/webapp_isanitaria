@@ -11,7 +11,7 @@ layout = html.Div(
       'color': '#7FDBFF'
     }
   )),
-        dbc.Row(dcc.Link('Go to App 1', href='/apps/app1') ),
+        dbc.Row(dcc.Link('Go to App 1', href='/apps/app1')),
         dbc.Row(dcc.Link('Go to App 2', href='/apps/app2'))
     ]
 )
