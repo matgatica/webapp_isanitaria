@@ -1,9 +1,9 @@
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import dcc
+from dash import html
 from dash.dependencies import Input, Output
 import dash_auth
 from app import app, server
-from apps import app1, app2
+from apps import app1, app2, home
 
 VALID_USERNAME_PASSWORD_PAIRS = {
     'isanitaria': 'Seremi1025'
@@ -28,7 +28,7 @@ def display_page(pathname):
     elif pathname == '/apps/app2':
         return app2.layout
     else:
-        return app1.layout
+        return home.layout
 
 if __name__ == '__main__':
     app.run_server(debug=True)

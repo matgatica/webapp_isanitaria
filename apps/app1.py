@@ -1,5 +1,5 @@
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import dcc
+from dash import html
 from dash.dependencies import Input, Output
 import dash
 import pandas as pd
@@ -7,6 +7,7 @@ import plotly.express as px
 import datetime as dt
 from app import app
 from datetime import date
+import dash_bootstrap_components as dbc
 
 df_inv = pd.read_csv('DATA/CASOS_INV.csv',dtype=str,sep=";")
 df_inv["_id.dia_seg"]=pd.to_datetime(df_inv["_id.dia_seg"],format="%d-%m-%Y")
@@ -39,7 +40,10 @@ layout = html.Div([
         initial_visible_month=date(2021, 1, 1),
         end_date=date(2021, 6 ,1),
         start_date=date(2021, 1, 1)
-     )
+     ),
+     dbc.Row(dcc.Link('Go to App 2', href='/apps/app2')),
+     dbc.Row(dcc.Link('Go to Home', href='/apps/'))
+
 ])
 
 @app.callback(
