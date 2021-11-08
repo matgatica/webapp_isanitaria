@@ -19,7 +19,6 @@ layout = html.Div([
     dbc.Row(dcc.Link('Go to Home', href='/apps/'))
 ])
 
-
 @app.callback(
     Output('app-2-display-value', 'children'),
     Input('app-2-dropdown', 'value'))

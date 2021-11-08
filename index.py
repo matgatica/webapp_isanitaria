@@ -13,7 +13,6 @@ auth = dash_auth.BasicAuth(
     VALID_USERNAME_PASSWORD_PAIRS
 )
 
-
 app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
     html.Div(id='page-content')
@@ -27,8 +26,8 @@ def display_page(pathname):
         return app1.layout
     elif pathname == '/apps/app2':
         return app2.layout
-    else:
-        return home.layout
+    # else:
+    #     return home.layout
 
 if __name__ == '__main__':
     app.run_server(debug=True)
