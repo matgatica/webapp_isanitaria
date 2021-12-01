@@ -4,9 +4,7 @@ from dash import html
 from dash.dependencies import Input, Output
 import dash_auth
 from apps import app1, app2, home
-
-app = dash.Dash(__name__, suppress_callback_exceptions=True)
-server = app.server
+from app import app
 
 VALID_USERNAME_PASSWORD_PAIRS = {
     'isanitaria': 'Seremi1025'

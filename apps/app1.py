@@ -5,7 +5,7 @@ import dash
 import pandas as pd
 import plotly.express as px
 import datetime as dt
-from index import app
+from app import app
 from datetime import date
 import dash_bootstrap_components as dbc
 from datetime import datetime as dt
