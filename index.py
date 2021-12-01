@@ -2,7 +2,7 @@ from dash import dcc
 from dash import html
 from dash.dependencies import Input, Output
 import dash_auth
-from app import app, server
+from app import app
 from apps import app1, app2, home
 
 VALID_USERNAME_PASSWORD_PAIRS = {
@@ -12,6 +12,7 @@ auth = dash_auth.BasicAuth(
     app,
     VALID_USERNAME_PASSWORD_PAIRS
 )
+server = app.server
 
 app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
