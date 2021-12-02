@@ -19,6 +19,8 @@ df_inv_res.fillna(0,inplace=True)
 df_inv_estab.fillna(0,inplace=True)
 
 
+df_inv_res_unpivoted = df_inv_res.melt(id_vars=['cont_comuna'], var_name='date', value_name='cuenta')
+df_inv_estab_unpivoted = df_inv_estab.melt(id_vars=['comuna_estab_deis'], var_name='date', value_name='cuenta')
 
 
 lista_comunas=[]
@@ -33,15 +35,28 @@ for i in df_inv_estab.comuna_estab_deis.unique():
 
 
 
-layout = html.Div([
-    html.H1(children='Casos Investigación por comuna de residencia'),
+layout = html.Div(
+    style={
+'background-image': 'url(“/assets/fondo3-1.png”)',
+},
+children=[
+html.H1(
+    children = 'Centro de Trazabilidad',
+    style = {
+      'textAlign': 'center',
+      'color': '#7FDBFF'
+    }
+  ),
+
+    html.H2(children='Casos Investigación por comuna de residencia'),
 
     dcc.Graph(id='indicator-graphic'),
 
     dcc.Dropdown(
         id='id_comuna_residencia',
         options=lista_comunas,
-        value=df_inv_res.cont_comuna.unique()[0]
+        value=[df_inv_res.cont_comuna.unique()[0]],
+        multi=True     
     ),
 
      dcc.DatePickerRange(
@@ -53,14 +68,15 @@ layout = html.Div([
         start_date=date(2021, 11, 1)
      ),
      
-     html.H1(children='Casos Investigación por comuna de establecimiento'),
+     html.H2(children='Casos Investigación por comuna de establecimiento'),
 
      dcc.Graph(id='indicator-graphic_2'),
 
      dcc.Dropdown(
         id='id_comuna_estab',
         options=lista_comunas_estab,
-        value=df_inv_estab.comuna_estab_deis.unique()[0]
+        value=[df_inv_estab.comuna_estab_deis.unique()[0]],
+        multi=True
     ),
 
      dcc.DatePickerRange(
@@ -86,16 +102,11 @@ layout = html.Div([
 )
 
 def update_graph(value,startdate,enddate):               
-    df=df_inv_res
+    df=df_inv_res_unpivoted
     
-    df=df[df.cont_comuna==value]
-    dff = df[[x for x in df.columns if x>=startdate and x<=enddate]]
-  
-    dependiente=dff.values[0]
-    
-    independiente=np.array(dff.columns.map(lambda x: dt.strptime(x,"%Y-%m-%d").date()))
-    
-    fig2 = px.line(x=independiente,y=dependiente)
+    df=df[df.cont_comuna.isin(value)]
+    dff = df[(df.date>=startdate)&(df.date<=enddate)]
+    fig2 = px.line(dff,x='date',y='cuenta',color='cont_comuna')
 
     fig2.update_layout(margin={'l': 40, 'b': 40, 't': 10, 'r': 0}, hovermode='closest')
 
@@ -113,13 +124,13 @@ def update_graph(value,startdate,enddate):
 
 
 def update_graph_2(value,startdate,enddate):
-    df=df_inv_estab
-    df=df[df.comuna_estab_deis==value]
-    dff = df[[x for x in df.columns if x>=startdate and x<=enddate]]
-    independiente=np.array(dff.columns.map(lambda x: dt.strptime(x,"%Y-%m-%d").date()))
+    df=df_inv_estab_unpivoted
     
-    dependiente=dff.values[0]
-    fig1 = px.line(x=independiente,y=dependiente)
+    df=df[df.comuna_estab_deis.isin(value)]
+    dff = df[(df.date>=startdate)&(df.date<=enddate)]
+  
+    
+    fig1 = px.line(dff,x='date',y='cuenta',color='comuna_estab_deis')
 
     fig1.update_layout(margin={'l': 40, 'b': 40, 't': 10, 'r': 0}, hovermode='closest')
 

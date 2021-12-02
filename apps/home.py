@@ -2,7 +2,10 @@ import dash_bootstrap_components as dbc
 from dash import html
 from dash import dcc
 
-layout = html.Div(
+layout = html.Div(style={
+'background-image': 'url(“/assets/fondo3-1.png”)',
+},
+children=
     [
         dbc.Row(html.H1(
     children = 'Inteligencia Sanitaria',
