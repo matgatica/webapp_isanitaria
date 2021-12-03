@@ -3,7 +3,7 @@ import dash
 from dash import html
 from dash.dependencies import Input, Output
 import dash_auth
-from apps import app1, app2, home
+from apps import app1, app2, home, app3
 from app import app,server
 
 server=server
@@ -29,8 +29,10 @@ def display_page(pathname):
         return app1.layout
     elif pathname == '/apps/app2':
         return app2.layout
+    elif pathname == '/apps/app3':
+        return app3.layout
     else:
-        return home.layout
+        return app3.layout
 
 if __name__ == '__main__':
     app.run_server(debug=True)
