@@ -24,6 +24,7 @@ app.layout = html.Div([
 
 @app.callback(Output('page-content', 'children'),
               Input('url', 'pathname'))
+              
 def display_page(pathname):
     if pathname == '/apps/app1':
         return app1.layout

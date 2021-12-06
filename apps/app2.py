@@ -16,7 +16,7 @@ layout = html.Div([
     ),
     html.Div(id='app-2-display-value'),
     dcc.Link('Go to App 1', href='/apps/app1'),
-    dbc.Row(dcc.Link('Go to Home', href='/apps/'))
+    dbc.Row(dcc.Link('Go to Home', href='/'))
 ])
 
 @app.callback(

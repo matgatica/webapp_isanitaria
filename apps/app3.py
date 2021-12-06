@@ -7,6 +7,17 @@ from app import app
 import plotly.express as px
 import pandas as pd
 from datetime import date
+from epiweeks import Week
+
+
+df_indicadores=pd.read_excel("DATA/df_resumendata.xlsx").drop(columns=["Unnamed: 0","Unnamed: 10"])
+df_indicadores["fecha"]=pd.to_datetime(df_indicadores["source"].str[:20].str[12:],format='%Y%m%d')
+df_indicadores["SE"]=df_indicadores["fecha"].apply(lambda x: Week.fromdate(x, system="iso").week)
+
+lista_comunas_ind=[]
+for i in df_indicadores.Comuna.unique():
+    mini_dict={'label':f'{i}',"value":f"{i}"}
+    lista_comunas_ind.append(mini_dict)
 
 
 df_inv_res = pd.read_csv('DATA/casos_inv_comuna_res.csv',sep=",",parse_dates=True,infer_datetime_format=True)
@@ -40,6 +51,17 @@ lista_comunas_seg_res=[]
 for i in df_casos_seg_res.cont_comuna.unique():
     mini_dict={'label':f'{i}',"value":f"{i}"}
     lista_comunas_seg_res.append(mini_dict)
+
+df_casos_inv_res_prev = pd.read_csv('DATA/casos_inv_comuna_res_prev.csv',sep=",",parse_dates=True,infer_datetime_format=True)
+df_casos_inv_res_prev.fillna(0,inplace=True)
+df_casos_inv_res_prev_unpivoted = df_casos_inv_res_prev.melt(id_vars=['cont_comuna','prevision'], var_name='date', value_name='cuenta')
+
+lista_comunas_seg_res_prev=[]
+for i in df_casos_inv_res_prev.cont_comuna.unique():
+    mini_dict={'label':f'{i}',"value":f"{i}"}
+    lista_comunas_seg_res_prev.append(mini_dict)
+
+
 
 
 # the style arguments for the sidebar.
@@ -150,24 +172,22 @@ controls = dbc.Form(
             }
         )]),
         html.Br(),
-        dbc.Button(
-            id='submit_button',
-            n_clicks=0,
-            children='Submit',
-            color='primary',
+        
+        dcc.Link(html.H3('Go To Trazabilidad'), href='/apps/app3'),
+        dcc.Link(html.H3('Go To Indicadores'), href='/apps/app3')
             
-        ),
+        
     ]
 )
 
 sidebar = html.Div(
     [
-        html.H2('Parameters', style=TEXT_STYLE),
+        html.H2('MENU', style=TEXT_STYLE),
         html.Hr(),
         controls
     ],
     style=SIDEBAR_STYLE,
-)
+)   
 
 content_first_row = dbc.Row([
     dbc.Col(
@@ -231,23 +251,26 @@ content_first_row = dbc.Row([
 
 content_second_row = dbc.Row(
     [
-        dbc.Col(
-            dcc.Graph(id='graph_1'), md=4
-        ),
-        dbc.Col(
-            dcc.Graph(id='graph_2'), md=4
-        ),
-        dbc.Col(
-            dcc.Graph(id='graph_3'), md=4
-        )
-    ]
-)
+        dbc.Col(children=[
+            html.H2(children='Indicador 5'),
+            dcc.Graph(id='graph_indicadores'),
 
-content_third_row = dbc.Row(
-    [
-        dbc.Col(
-            dcc.Graph(id='graph_4'), md=12,
+        dcc.Dropdown(
+            id='id_comuna_ind',
+            options=lista_comunas_ind,
+            value=['Santiago'],
+            multi=True     
+        ),
+        dcc.RangeSlider(
+            id='slider_ind',
+            min=0,
+            max=100,
+            step=1,
+            value=[5, 50]
+        )]
+
         )
+        
     ]
 )
 
@@ -260,7 +283,7 @@ content_fourth_row = dbc.Row(
         dcc.Dropdown(
             id='id_comuna_residencia',
             options=lista_comunas,
-            value=[df_inv_res.cont_comuna.unique()[0]],
+            value=['Santiago'],
             multi=True     
         ),
         dcc.DatePickerRange(
@@ -281,7 +304,7 @@ content_fourth_row = dbc.Row(
         dcc.Dropdown(
             id='id_comuna_estab',
             options=lista_comunas_estab,
-            value=[df_inv_estab.comuna_estab_deis.unique()[0]],
+            value=['Santiago'],
             multi=True
         ),
         dcc.DatePickerRange(
@@ -306,7 +329,7 @@ content_fifth_row = dbc.Row(
         dcc.Dropdown(
             id='id_comuna_residencia_seg',
             options=lista_comunas_seg_res,
-            value=[df_casos_seg_res.cont_comuna.unique()[0]],
+            value=['Santiago'],
             multi=True     
         ),
         dcc.DatePickerRange(
@@ -316,22 +339,47 @@ content_fifth_row = dbc.Row(
             initial_visible_month=date(2021, 11, 1),
             end_date=date(2021, 11 ,15),
             start_date=date(2021, 11, 1)
-        )],md=6
+        )]
+        )
+    ]
+)
+
+content_sixth_row = dbc.Row(
+    [
+        dbc.Col(children=[
+            html.H2(children='Casos Investigacion por comuna de residencia y previsión'),
+            dcc.Graph(id='casos_inv_res_prev'),
+
+        dcc.Dropdown(
+            id='id_comuna_residencia_inv_prev',
+            options=lista_comunas_seg_res,
+            value=['Santiago'],
+            multi=True     
+        ),
+        dcc.DatePickerRange(
+            id='my-date-picker-range_4',
+            min_date_allowed=date(1995, 8, 5),
+            max_date_allowed=date(2022, 1, 1),
+            initial_visible_month=date(2021, 11, 1),
+            end_date=date(2021, 11 ,15),
+            start_date=date(2021, 11, 1)
+        )]
         )
     ]
 )
 
 
-
 content = html.Div(
     [
-        html.H2('Dash Board I SANITARIA', style=TEXT_STYLE),
+        html.H2('TRAZABILIDAD', style=TEXT_STYLE),
+        html.H6('<Inteligencia Sanitaria>', style=TEXT_STYLE),
         html.Hr(),
         content_first_row,
         content_second_row,
-        content_third_row,
         content_fourth_row,
+        content_sixth_row,
         content_fifth_row
+        
     ],
     style=CONTENT_STYLE
 )
@@ -339,85 +387,28 @@ content = html.Div(
 layout = html.Div([sidebar, content])
 
 
-@app.callback(
-    Output('graph_1', 'figure'),
-    [Input('submit_button', 'n_clicks')],
-    [State('dropdown', 'value'), State('range_slider', 'value'), State('check_list', 'value'),
-     State('radio_items', 'value')
-     ])
-def update_graph_1(n_clicks, dropdown_value, range_slider_value, check_list_value, radio_items_value):
-    print(n_clicks)
-    print(dropdown_value)
-    print(range_slider_value)
-    print(check_list_value)
-    print(radio_items_value)
-    fig = {
-        'data': [{
-            'x': [1, 2, 3],
-            'y': [3, 4, 5]
-        }]
-    }
-    return fig
 
 
-@app.callback(
-    Output('graph_2', 'figure'),
-    [Input('submit_button', 'n_clicks')],
-    [State('dropdown', 'value'), State('range_slider', 'value'), State('check_list', 'value'),
-     State('radio_items', 'value')
-     ])
-def update_graph_2(n_clicks, dropdown_value, range_slider_value, check_list_value, radio_items_value):
-    print(n_clicks)
-    print(dropdown_value)
-    print(range_slider_value)
-    print(check_list_value)
-    print(radio_items_value)
-    fig = {
-        'data': [{
-            'x': [1, 2, 3],
-            'y': [3, 4, 5],
-            'type': 'bar'
-        }]
-    }
-    return fig
 
-
-@app.callback(
-    Output('graph_3', 'figure'),
-    [Input('submit_button', 'n_clicks')],
-    [State('dropdown', 'value'), State('range_slider', 'value'), State('check_list', 'value'),
-     State('radio_items', 'value')
-     ])
-def update_graph_3(n_clicks, dropdown_value, range_slider_value, check_list_value, radio_items_value):
-    print(n_clicks)
-    print(dropdown_value)
-    print(range_slider_value)
-    print(check_list_value)
-    print(radio_items_value)
-    df = px.data.iris()
-    fig = px.density_contour(df, x='sepal_width', y='sepal_length')
-    return fig
-
-
-@app.callback(
-    Output('graph_4', 'figure'),
-    [Input('submit_button', 'n_clicks')],
-    [State('dropdown', 'value'), State('range_slider', 'value'), State('check_list', 'value'),
-     State('radio_items', 'value')
-     ])
-def update_graph_4(n_clicks, dropdown_value, range_slider_value, check_list_value, radio_items_value):
-    print(n_clicks)
-    print(dropdown_value)
-    print(range_slider_value)
-    print(check_list_value)
-    print(radio_items_value)  # Sample data and figure
-    df = px.data.gapminder().query('year==2007')
-    fig = px.scatter_geo(df, locations='iso_alpha', color='continent',
-                         hover_name='country', size='pop', projection='natural earth')
-    fig.update_layout({
-        'height': 600
-    })
-    return fig
+# @app.callback(
+#     Output('graph_4', 'figure'),
+#     [Input('submit_button', 'n_clicks')],
+#     [State('dropdown', 'value'), State('range_slider', 'value'), State('check_list', 'value'),
+#      State('radio_items', 'value')
+#      ])
+# def update_graph_4(n_clicks, dropdown_value, range_slider_value, check_list_value, radio_items_value):
+#     print(n_clicks)
+#     print(dropdown_value)
+#     print(range_slider_value)
+#     print(check_list_value)
+#     print(radio_items_value)  # Sample data and figure
+#     df = px.data.gapminder().query('year==2007')
+#     fig = px.scatter_geo(df, locations='iso_alpha', color='continent',
+#                          hover_name='country', size='pop', projection='natural earth')
+#     fig.update_layout({
+#         'height': 600
+#     })
+#     return fig
 
 
 @app.callback(
@@ -490,30 +481,47 @@ def update_graph_3(value,startdate,enddate):
 
 
 @app.callback(
-    Output('card_title_1', 'children'),
-    [Input('submit_button', 'n_clicks')],
-    [State('dropdown', 'value'), State('range_slider', 'value'), State('check_list', 'value'),
-     State('radio_items', 'value')
-     ])
-def update_card_title_1(n_clicks, dropdown_value, range_slider_value, check_list_value, radio_items_value):
-    print(n_clicks)
-    print(dropdown_value)
-    print(range_slider_value)
-    print(check_list_value)
-    print(radio_items_value)  # Sample data and figure
-    return 'Card Tile 1 change by call back'
+    Output('casos_inv_res_prev', 'figure'),
+
+    [
+    Input('id_comuna_residencia_inv_prev', 'value'),
+    Input('my-date-picker-range_4', 'start_date'),
+    Input('my-date-picker-range_4', 'end_date'),
+    ]
+)
+
+def update_graph_4(value,startdate,enddate):
+    df=df_casos_inv_res_prev_unpivoted
+    
+    df=df[df.cont_comuna.isin(value)]
+    dff = df[(df.date>=startdate)&(df.date<=enddate)]
+    
+    fig4 = px.line(dff,x='date',y='cuenta',color='cont_comuna',symbol='prevision')
+
+    fig4.update_layout(margin={'l': 40, 'b': 40, 't': 10, 'r': 0}, hovermode='closest')
+
+    return fig4
+
 
 
 @app.callback(
-    Output('card_text_1', 'children'),
-    [Input('submit_button', 'n_clicks')],
-    [State('dropdown', 'value'), State('range_slider', 'value'), State('check_list', 'value'),
-     State('radio_items', 'value')
-     ])
-def update_card_text_1(n_clicks, dropdown_value, range_slider_value, check_list_value, radio_items_value):
-    print(n_clicks)
-    print(dropdown_value)
-    print(range_slider_value)
-    print(check_list_value)
-    print(radio_items_value)  # Sample data and figure
-    return 'Card text change by call back'
+    Output('graph_indicadores', 'figure'),
+    [
+    Input('id_comuna_ind', 'value'),
+    Input('slider_ind', 'value')
+    ]
+)
+
+def update_graph_4(value_comuna,value_ind):
+    df=df_indicadores
+    
+    df=df[df.Comuna.isin(value_comuna)]
+    dff = df[(df.SE>=value_ind[0])&(df.SE<=value_ind[1])]
+    
+    fig5 = px.line(dff,x='SE',y='Indicador 5',color='Comuna')
+
+    fig5.update_layout(margin={'l': 40, 'b': 40, 't': 10, 'r': 0}, hovermode='closest')
+
+    return fig5
+
+
