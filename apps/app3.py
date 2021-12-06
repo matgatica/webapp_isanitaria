@@ -177,7 +177,7 @@ content_first_row = dbc.Row([
 content_fourth_row = dbc.Row(
     [
         dbc.Col(children=[
-            html.H2(children='Casos Investigación por comuna de establecimiento'),
+            html.H2(children='Casos Investigación por comuna de residencia'),
             dcc.Graph(id='casos_inv_res'),
 
         dcc.Dropdown(
