@@ -95,88 +95,12 @@ CARD_TEXT_STYLE = {
 
 controls = dbc.Form(
     [
-        html.P('Dropdown', style={
-            'textAlign': 'center'
-        }),
-        dcc.Dropdown(
-            id='dropdown',
-            options=[{
-                'label': 'Value One',
-                'value': 'value1'
-            }, {
-                'label': 'Value Two',
-                'value': 'value2'
-            },
-                {
-                    'label': 'Value Three',
-                    'value': 'value3'
-                }
-            ],
-            value=['value1'],  # default value
-            multi=True
-        ),
-        html.Br(),
-        html.P('Range Slider', style={
-            'textAlign': 'center'
-        }),
-        dcc.RangeSlider(
-            id='range_slider',
-            min=0,
-            max=20,
-            step=0.5,
-            value=[5, 15]
-        ),
-        html.P('Check Box', style={
-            'textAlign': 'center'
-        }),
-        dbc.Card([dbc.Checklist(
-            id='check_list',
-            options=[{
-                'label': 'Value One',
-                'value': 'value1'
-            },
-                {
-                    'label': 'Value Two',
-                    'value': 'value2'
-                },
-                {
-                    'label': 'Value Three',
-                    'value': 'value3'
-                }
-            ],
-            value=['value1', 'value2'],
-            inline=True
-        )]),
-        html.Br(),
-        html.P('Radio Items', style={
-            'textAlign': 'center'
-        }),
-        dbc.Card([dbc.RadioItems(
-            id='radio_items',
-            options=[{
-                'label': 'Value One',
-                'value': 'value1'
-            },
-                {
-                    'label': 'Value Two',
-                    'value': 'value2'
-                },
-                {
-                    'label': 'Value Three',
-                    'value': 'value3'
-                }
-            ],
-            value='value1',
-            style={
-                'margin': 'auto'
-            }
-        )]),
         html.Br(),
         
         dcc.Link(html.H3('Go To Trazabilidad'), href='/apps/app3'),
-        dcc.Link(html.H3('Go To Indicadores'), href='/apps/app3')
+        dcc.Link(html.H3('Go To Indicadores'), href='/apps/app2'),
+        dcc.Link(html.H3('Go To Home'), href='/')
             
-        
     ]
 )
 
@@ -249,30 +173,6 @@ content_first_row = dbc.Row([
     )
 ])
 
-content_second_row = dbc.Row(
-    [
-        dbc.Col(children=[
-            html.H2(children='Indicador 5'),
-            dcc.Graph(id='graph_indicadores'),
-
-        dcc.Dropdown(
-            id='id_comuna_ind',
-            options=lista_comunas_ind,
-            value=['Santiago'],
-            multi=True     
-        ),
-        dcc.RangeSlider(
-            id='slider_ind',
-            min=0,
-            max=100,
-            step=1,
-            value=[5, 50]
-        )]
-
-        )
-        
-    ]
-)
 
 content_fourth_row = dbc.Row(
     [
@@ -374,8 +274,6 @@ content = html.Div(
         html.H2('TRAZABILIDAD', style=TEXT_STYLE),
         html.H6('<Inteligencia Sanitaria>', style=TEXT_STYLE),
         html.Hr(),
-        content_first_row,
-        content_second_row,
         content_fourth_row,
         content_sixth_row,
         content_fifth_row
@@ -504,24 +402,5 @@ def update_graph_4(value,startdate,enddate):
 
 
 
-@app.callback(
-    Output('graph_indicadores', 'figure'),
-    [
-    Input('id_comuna_ind', 'value'),
-    Input('slider_ind', 'value')
-    ]
-)
-
-def update_graph_4(value_comuna,value_ind):
-    df=df_indicadores
-    
-    df=df[df.Comuna.isin(value_comuna)]
-    dff = df[(df.SE>=value_ind[0])&(df.SE<=value_ind[1])]
-    
-    fig5 = px.line(dff,x='SE',y='Indicador 5',color='Comuna')
-
-    fig5.update_layout(margin={'l': 40, 'b': 40, 't': 10, 'r': 0}, hovermode='closest')
-
-    return fig5
 
 

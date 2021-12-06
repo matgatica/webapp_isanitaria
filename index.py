@@ -33,7 +33,7 @@ def display_page(pathname):
     elif pathname == '/apps/app3':
         return app3.layout
     else:
-        return app3.layout
+        return home.layout
 
 if __name__ == '__main__':
     app.run_server(debug=True)
