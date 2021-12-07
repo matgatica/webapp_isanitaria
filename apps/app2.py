@@ -1604,7 +1604,7 @@ def update_graph_5(value_ind):
     dff.fillna('0',inplace=True)
     dff["Indicador 5"]=dff["Indicador 5"].astype(float)
 
-    fig6 = px.scatter_mapbox(dff,lat=dff.lat,lon=dff.lng,hover_name=dff["Comuna"],size="Indicador 5",color="Comuna",hover_data=["SE"],width=1500,height=1000)
+    fig6 = px.scatter_mapbox(dff,lat=dff.lat,lon=dff.lng,hover_name=dff["Comuna"],size="Indicador 5",color="Indicador 5",hover_data=["SE"],width=1500,height=1000)
     fig6.update_layout(mapbox_style="open-street-map")
     fig6.update_geos(fitbounds="locations")
     fig6.update_geos(
