@@ -1504,7 +1504,15 @@ content_second_row = dbc.Row(
             min=0,
             max=100,
             step=1,
-            value=[5, 50]
+            value=[5, 50],
+            marks={
+            1: '1',
+            10:'10',
+            20: '20',
+            30: '30',
+            40: '40',
+            50: '50'
+            }
         )]
 
         )
@@ -1524,6 +1532,14 @@ content_third_row = dbc.Row(
         max=50,
         step=1,
         value=30,
+        marks={
+            1: '1',
+            10:'10',
+            20: '20',
+            30: '30',
+            40: '40',
+            50: '50'
+            }
         ),]
 
         )
@@ -1581,14 +1597,14 @@ def update_graph_4(value_comuna,value_ind):
 def update_graph_5(value_ind):
     df=df_indicadores
 
-    dff = df[(df.SE<=value_ind)]
-    dff = df[(df.Comuna!='Total')]
+    dff = df[(df.SE==value_ind)]
+    dff = dff[(dff.Comuna!='Total')]
     dff["lat"]=dff["lat"].astype(float)
     dff["lng"]=dff["lng"].astype(float)
     dff.fillna('0',inplace=True)
     dff["Indicador 5"]=dff["Indicador 5"].astype(float)
 
-    fig6 = px.scatter_mapbox(dff,lat=dff.lat,lon=dff.lng,hover_name="Comuna",size="Indicador 5",color="Comuna",width=1500,height=1000)
+    fig6 = px.scatter_mapbox(dff,lat=dff.lat,lon=dff.lng,hover_name=dff["Comuna"],size="Indicador 5",color="Comuna",hover_data=["SE"],width=1500,height=1000)
     fig6.update_layout(mapbox_style="open-street-map")
     fig6.update_geos(fitbounds="locations")
     fig6.update_geos(
