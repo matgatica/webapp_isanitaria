@@ -1,9 +1,12 @@
 from dash import dcc
+import dash
 from dash import html
 from dash.dependencies import Input, Output
 import dash_auth
-from app import app, server
-from apps import app1, app2, home
+from apps import app1, app2, home, app3
+from app import app,server
+
+server=server
 
 VALID_USERNAME_PASSWORD_PAIRS = {
     'isanitaria': 'Seremi1025'
@@ -21,11 +24,14 @@ app.layout = html.Div([
 
 @app.callback(Output('page-content', 'children'),
               Input('url', 'pathname'))
+              
 def display_page(pathname):
     if pathname == '/apps/app1':
         return app1.layout
     elif pathname == '/apps/app2':
         return app2.layout
+    elif pathname == '/apps/app3':
+        return app3.layout
     else:
         return home.layout
 
