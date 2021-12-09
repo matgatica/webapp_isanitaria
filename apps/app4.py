@@ -8,7 +8,7 @@ import plotly.express as px
 import pandas as pd
 from datetime import date
 
-ventiladores=pd.read_csv("C:/Users/gaticam/Documents/GitHub/PROYECTO_WEB_APP_INTSANITARIA/DATA/ventiladores_nacional.csv",sep=',').drop(columns=["Unnamed: 0"])
+ventiladores=pd.read_csv("DATA/ventiladores_nacional.csv",sep=',').drop(columns=["Unnamed: 0"])
 ventiladores_unpivoted = ventiladores.melt(id_vars=['Ventiladores'], var_name='date', value_name='cuenta')
 lista_ventiladores=[
                     {'label':'total',"value":"total"},
@@ -16,7 +16,7 @@ lista_ventiladores=[
                     {'label':"ocupados","value":"ocupados"}
                     ]
 
-residencias=pd.read_csv("C:/Users/gaticam/Documents/GitHub/PROYECTO_WEB_APP_INTSANITARIA/DATA/residencias_nacional.csv",sep=',').drop(columns=["Unnamed: 0"])
+residencias=pd.read_csv("DATA/residencias_nacional.csv",sep=',').drop(columns=["Unnamed: 0"])
 residencias_unpivoted = residencias.melt(id_vars=['Region','Categoria'], var_name='date', value_name='cuenta')
 
 lista_regiones_residencias=[]
