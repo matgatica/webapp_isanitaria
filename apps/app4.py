@@ -37,7 +37,7 @@ SIDEBAR_STYLE = {
     'bottom': 0,
     'width': '20%',
     'padding': '20px 10px',
-    'background-color': '#f8f9fa'
+    
 }
 
 # the style arguments for the main content page.
@@ -50,7 +50,7 @@ CONTENT_STYLE = {
 
 TEXT_STYLE = {
     'textAlign': 'center',
-    'color': '#191970'
+  
 }
 
 CARD_TEXT_STYLE = {
@@ -83,7 +83,7 @@ sidebar = html.Div(
 content_ventiladores = dbc.Row(
     [
         
-        html.H2(children='Ventiladores Nacional'),
+        html.H2(children='VENTILADORES NACIONAL'),
         dcc.Graph(id='ventiladores_nacional'),
 
         dcc.Dropdown(
@@ -105,7 +105,7 @@ content_ventiladores = dbc.Row(
 content_residencias = dbc.Row(
     [
         
-        html.H2(children='Residencias Nacional'),
+        html.H2(children='RESIDENCIAS NACIONAL'),
         dcc.Graph(id='residencias_nacional'),
 
         dcc.Dropdown(
@@ -134,7 +134,7 @@ content_residencias = dbc.Row(
 
 content = html.Div(
     [
-        html.H2('Info Nacional', style=TEXT_STYLE),
+        html.H2('INFO NACIONAL', style=TEXT_STYLE),
         html.H6('<Inteligencia Sanitaria>', style=TEXT_STYLE),
         html.Hr(),
         content_ventiladores,

@@ -72,7 +72,7 @@ SIDEBAR_STYLE = {
     'bottom': 0,
     'width': '20%',
     'padding': '20px 10px',
-    'background-color': '#f8f9fa'
+    
 }
 
 # the style arguments for the main content page.
@@ -85,7 +85,7 @@ CONTENT_STYLE = {
 
 TEXT_STYLE = {
     'textAlign': 'center',
-    'color': '#191970'
+
 }
 
 CARD_TEXT_STYLE = {

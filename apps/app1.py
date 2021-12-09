@@ -44,7 +44,7 @@ html.H1(
     children = 'Centro de Trazabilidad',
     style = {
       'textAlign': 'center',
-      'color': '#7FDBFF'
+     
     }
   ),
 
