@@ -39,12 +39,24 @@ CARD_TEXT_STYLE = {
     'color': '#0074D9'
 }
 
+lista_ind=[
+            {'label':'Indicador 5',"value":"Indicador 5"},
+            {'label':'Indicador 6',"value":"Indicador 6"},
+            {'label':'Indicador 7',"value":"Indicador 7"}
+            ]
+
 controls = dbc.Form(
     [
         html.Br(),
         
         dcc.Link(html.H3('Go To Trazabilidad'), href='/apps/app3'),
         dcc.Link(html.H3('Go To Home'), href='/'),
+
+        dcc.Dropdown(
+            id='id_ind',
+            options=lista_ind,
+            value='Indicador 5'
+        )
          
     ]
 )
@@ -1490,7 +1502,7 @@ for i in df_indicadores.Comuna.unique():
 content_second_row = dbc.Row(
     [
         dbc.Col(children=[
-            html.H2(children='Indicador 5'),
+            html.H2(children='Indicador'),
             dcc.Graph(id='graph_indicadores'),
 
         dcc.Dropdown(
@@ -1523,7 +1535,7 @@ content_second_row = dbc.Row(
 content_third_row = dbc.Row(
     [
         dbc.Col(children=[
-            html.H2(children='Indicador 5'),
+            html.H2(children='Indicador'),
             dcc.Graph(id="geograph_indicadores"),
 
         dcc.Slider(
@@ -1547,8 +1559,6 @@ content_third_row = dbc.Row(
     ]
 )
 
-
-
 content = html.Div(
     [
         html.H2('INDICADORES', style=TEXT_STYLE),
@@ -1569,18 +1579,19 @@ layout = html.Div([sidebar, content])
     Output('graph_indicadores', 'figure'),
     [
     Input('id_comuna_ind', 'value'),
-    Input('slider_ind', 'value')
+    Input('slider_ind', 'value'),
+    Input('id_ind', 'value'),
+    
+    
     ]
 )
 
-def update_graph_4(value_comuna,value_ind):
+def update_graph_4(value_comuna,value_ind,indicador):
+
     df=df_indicadores
-    
     df=df[df.Comuna.isin(value_comuna)]
     dff = df[(df.SE>=value_ind[0])&(df.SE<=value_ind[1])]
-    
-    fig5 = px.line(dff,x='SE',y='Indicador 5',color='Comuna')
-
+    fig5 = px.line(dff,x='SE',y=indicador,color='Comuna')
     fig5.update_layout(margin={'l': 40, 'b': 40, 't': 10, 'r': 0}, hovermode='closest')
 
     return fig5
@@ -1590,11 +1601,12 @@ def update_graph_4(value_comuna,value_ind):
 @app.callback(
     Output('geograph_indicadores', 'figure'),
     [
-    Input('slider_SE', 'value')
+    Input('slider_SE', 'value'),
+    Input('id_ind', 'value')
     ]
 )
 
-def update_graph_5(value_ind):
+def update_graph_5(value_ind,indicador):
     df=df_indicadores
 
     dff = df[(df.SE==value_ind)]
@@ -1602,9 +1614,9 @@ def update_graph_5(value_ind):
     dff["lat"]=dff["lat"].astype(float)
     dff["lng"]=dff["lng"].astype(float)
     dff.fillna('0',inplace=True)
-    dff["Indicador 5"]=dff["Indicador 5"].astype(float)
+    dff[indicador]=dff[indicador].astype(float)
 
-    fig6 = px.scatter_mapbox(dff,lat=dff.lat,lon=dff.lng,hover_name=dff["Comuna"],size="Indicador 5",color="Indicador 5",hover_data=["SE"],width=1500,height=1000)
+    fig6 = px.scatter_mapbox(dff,lat=dff.lat,lon=dff.lng,hover_name=dff["Comuna"],size=indicador,color=indicador,hover_data=["SE"],width=1500,height=1000)
     fig6.update_layout(mapbox_style="open-street-map")
     fig6.update_geos(fitbounds="locations")
     fig6.update_geos(
