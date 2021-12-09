@@ -87,8 +87,11 @@ html.H1(
         end_date=date(2021, 11 ,15),
         start_date=date(2021, 11, 1)
      ),
-     dbc.Row(dcc.Link('Go to App 2', href='/apps/app2')),
-     dbc.Row(dcc.Link('Go to Home', href='/apps/'))
+    dcc.Link(html.H3('Go To Trazabilidad'), href='/apps/app3'),
+        dcc.Link(html.H3('Go To Indicadores'), href='/apps/app2'),
+        dcc.Link(html.H3('Go To Info Nacional'), href='/apps/app4'),
+        dcc.Link(html.H3('Go To Vacunas Nacional'), href='/apps/app5'),
+        dcc.Link(html.H3('Go To Home'), href='/')
 
 ])
 

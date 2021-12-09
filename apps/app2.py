@@ -50,6 +50,9 @@ controls = dbc.Form(
         html.Br(),
         
         dcc.Link(html.H3('Go To Trazabilidad'), href='/apps/app3'),
+        dcc.Link(html.H3('Go To Indicadores'), href='/apps/app2'),
+        dcc.Link(html.H3('Go To Info Nacional'), href='/apps/app4'),
+        dcc.Link(html.H3('Go To Vacunas Nacional'), href='/apps/app5'),
         dcc.Link(html.H3('Go To Home'), href='/'),
 
         dcc.Dropdown(
@@ -1502,7 +1505,6 @@ for i in df_indicadores.Comuna.unique():
 content_second_row = dbc.Row(
     [
         dbc.Col(children=[
-            html.H2(children='Indicador'),
             dcc.Graph(id='graph_indicadores'),
 
         dcc.Dropdown(
@@ -1535,7 +1537,6 @@ content_second_row = dbc.Row(
 content_third_row = dbc.Row(
     [
         dbc.Col(children=[
-            html.H2(children='Indicador'),
             dcc.Graph(id="geograph_indicadores"),
 
         dcc.Slider(

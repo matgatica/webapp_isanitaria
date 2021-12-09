@@ -37,7 +37,11 @@ controls = dbc.Form(
         html.Br(),
         
         dcc.Link(html.H3('Go To Trazabilidad'), href='/apps/app3'),
-        dcc.Link(html.H3('Go To Indicadores'), href='/apps/app2')
+        dcc.Link(html.H3('Go To Indicadores'), href='/apps/app2'),
+        dcc.Link(html.H3('Go To Info Nacional'), href='/apps/app4'),
+        dcc.Link(html.H3('Go To Vacunas Nacional'), href='/apps/app5'),
+        dcc.Link(html.H3('Go To Home'), href='/')
+
             
     ]
 )
