@@ -7,7 +7,7 @@ from app import app
 import plotly.express as px
 import pandas as pd
 from datetime import date
-import dash_table
+from dash import dash_table
 
 
 
