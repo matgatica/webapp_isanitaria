@@ -1592,7 +1592,7 @@ def update_graph_4(value_comuna,value_ind,indicador):
     df=df_indicadores
     df=df[df.Comuna.isin(value_comuna)]
     dff = df[(df.SE>=value_ind[0])&(df.SE<=value_ind[1])]
-    fig5 = px.line(dff,x='SE',y=indicador,color='Comuna')
+    fig5 = px.line(dff,x='SE',y=indicador,color='Comuna',template='plotly_dark')
     fig5.update_layout(margin={'l': 40, 'b': 40, 't': 10, 'r': 0}, hovermode='closest')
 
     return fig5
@@ -1617,7 +1617,7 @@ def update_graph_5(value_ind,indicador):
     dff.fillna('0',inplace=True)
     dff[indicador]=dff[indicador].astype(float)
 
-    fig6 = px.scatter_mapbox(dff,lat=dff.lat,lon=dff.lng,hover_name=dff["Comuna"],size=indicador,color=indicador,hover_data=["SE"],width=1500,height=1000)
+    fig6 = px.scatter_mapbox(dff,lat=dff.lat,lon=dff.lng,hover_name=dff["Comuna"],size=indicador,color=indicador,hover_data=["SE"],width=1500,height=1000,template='plotly_dark')
     fig6.update_layout(mapbox_style="open-street-map")
     fig6.update_geos(fitbounds="locations")
     fig6.update_geos(

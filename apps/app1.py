@@ -109,7 +109,7 @@ def update_graph(value,startdate,enddate):
     
     df=df[df.cont_comuna.isin(value)]
     dff = df[(df.date>=startdate)&(df.date<=enddate)]
-    fig2 = px.line(dff,x='date',y='cuenta',color='cont_comuna')
+    fig2 = px.line(dff,x='date',y='cuenta',color='cont_comuna',template='plotly_dark')
 
     fig2.update_layout(margin={'l': 40, 'b': 40, 't': 10, 'r': 0}, hovermode='closest')
 
@@ -133,7 +133,7 @@ def update_graph_2(value,startdate,enddate):
     dff = df[(df.date>=startdate)&(df.date<=enddate)]
   
     
-    fig1 = px.line(dff,x='date',y='cuenta',color='comuna_estab_deis')
+    fig1 = px.line(dff,x='date',y='cuenta',color='comuna_estab_deis',template='plotly_dark')
 
     fig1.update_layout(margin={'l': 40, 'b': 40, 't': 10, 'r': 0}, hovermode='closest')
 

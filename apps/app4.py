@@ -162,7 +162,7 @@ def update_graph(value,startdate,enddate):
     
     df=df[df.Ventiladores.isin(value)]
     dff = df[(df.date>=startdate)&(df.date<=enddate)]
-    fig2 = px.line(dff,x='date',y='cuenta',color='Ventiladores')
+    fig2 = px.line(dff,x='date',y='cuenta',color='Ventiladores',template='plotly_dark')
 
     fig2.update_layout(margin={'l': 40, 'b': 40, 't': 10, 'r': 0}, hovermode='closest')
 
@@ -184,7 +184,7 @@ def update_graph(regiones_residencias,categorias_residencias,startdate,enddate):
     
     df=df[(df.Region.isin(regiones_residencias))&(df.Categoria==categorias_residencias)]
     dff = df[(df.date>=startdate)&(df.date<=enddate)]
-    fig3 = px.line(dff,x='date',y='cuenta',color='Region')
+    fig3 = px.line(dff,x='date',y='cuenta',color='Region',template='plotly_dark')
 
     fig3.update_layout(margin={'l': 40, 'b': 40, 't': 10, 'r': 0}, hovermode='closest')
 

@@ -74,7 +74,8 @@ tabla_vacuna = html.Div(
             dash_table.DataTable(
                 id='table-paging-with-graph',
                 columns=[
-                    {"name": i, "id": i} for i in vacunas.columns
+
+                    {"name": ["EDAD",i], "id": i} if i.isnumeric() else {"name": ["",i], "id": i}  for i in vacunas.columns
                 ],
                 page_current=0,
                 page_size=20,
@@ -93,7 +94,15 @@ tabla_vacuna = html.Div(
                             'minWidth': '180px', 'width': '180px', 'maxWidth': '180px',
                             'overflow': 'hidden',
                             'textOverflow': 'ellipsis',
-                        }
+                        },
+                        style_header={
+                                        'backgroundColor': 'rgb(30, 30, 30)',
+                                        'color': 'white'
+                                    },
+                        style_data={
+                                    'backgroundColor': 'rgb(50, 50, 50)',
+                                    'color': 'white'
+                                    }
             ),
             #style={'height': 750, 'overflowY': 'scroll'},
             #className='six columns'
@@ -195,30 +204,12 @@ def update_table(page_current, page_size, sort_by, filter):
     Input('table-paging-with-graph', "data"))
 def update_graph(rows):
     dff = pd.DataFrame(rows)
+    dff['total']=dff[columnas].sum(axis=1)
     return html.Div(
         [
             dcc.Graph(
                 id="columna",
-                figure={
-                    "data": [
-                        {
-                            "x": dff["Comuna"],
-                            "y": dff[columnas].sum(axis=1),
-                            "type": "bar",
-                            "marker": {"color": "#0074D9"},
-                        }
-                    ],
-                    "layout": {
-                        "xaxis": {"automargin": True},
-                        "yaxis": {"automargin": True},
-                        "height": 500,
-                        "margin": {"t": 10, "l": 10, "r": 10},
-
-                    }
-                }
+                figure=px.bar(dff, x='Comuna', y='total',template='plotly_dark')
             )
         ]
     )
-
-
-
