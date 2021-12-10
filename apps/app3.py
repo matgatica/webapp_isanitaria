@@ -96,13 +96,15 @@ CARD_TEXT_STYLE = {
 controls = dbc.Form(
     [
         html.Br(),
-        
-        dcc.Link(html.H3('Go To Trazabilidad'), href='/apps/app3'),
-        dcc.Link(html.H3('Go To Indicadores'), href='/apps/app2'),
-        dcc.Link(html.H3('Go To Info Nacional'), href='/apps/app4'),
-        dcc.Link(html.H3('Go To Vacunas Nacional'), href='/apps/app5'),
-        dcc.Link(html.H3('Go To Home'), href='/')
-            
+        dcc.Link(dbc.Button("Go To Trazabilidad", color="danger", className="d-grid gap-2 col-6 mx-auto",size='lg'), href='/apps/app3'),
+        html.Br(),
+        dcc.Link(dbc.Button("Go To Indicadores", color="danger", className="d-grid gap-2 col-6 mx-auto",size='lg'), href='/apps/app2'),
+        html.Br(),
+        dcc.Link(dbc.Button("Go To Info Nacional", color="danger", className="d-grid gap-2 col-6 mx-auto",size='lg'), href='/apps/app4'),
+        html.Br(),
+        dcc.Link(dbc.Button("Go To Vacunas Nacional", color="danger", className="d-grid gap-2 col-6 mx-auto",size='lg'), href='/apps/app5'),
+        html.Br(),
+        dcc.Link(dbc.Button("Go To Home", color="danger", className="d-grid gap-2 col-6 mx-auto",size='lg'), href='/')    
     ]
 )
 
