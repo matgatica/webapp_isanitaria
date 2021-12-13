@@ -63,13 +63,22 @@ content = html.Div([
         html.H6('<Inteligencia Sanitaria>', style=TEXT_STYLE),
         html.Hr(),
 
-        dbc.Row(dbc.Col(
-        html.Img(src='assets/cropped-header-minsal_yo-me-vacuno_vertical.png',style={'height':'100%', 'width':'100%'}),
-        md=3)
+        dbc.Row([dbc.Col(
+        html.Img(src='assets/logo-seremi-header.jpg',style={'height':'80%', 'width':'100%'}),
+        md=7),
+        dbc.Col(
+        html.Img(src='assets/cropped-header-minsal_yo-me-vacuno_vertical.png',style={'height':'80%', 'width':'100%'}),
+        md=3)]
+
         ),
 
-        dbc.Row(
-        html.H1('asdasd')
+        dbc.Row([
+        html.H1('<DASH - SALUD PUBLICA>'),
+        html.P(children='Página web con Gráficas y Tablas informativas alimentadas desde la Unidad de Inteligencia Sanitaria con data extraída desde el Github del Ministerio de Ciencias*\
+            y generada dentro de la misma unidad.'),
+        html.Br(),
+        html.P(children='*https://github.com/MinCiencia/Datos-COVID19') 
+        ]   
         )
     ],
     style=CONTENT_STYLE
