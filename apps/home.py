@@ -16,7 +16,7 @@ SIDEBAR_STYLE = {
 
 # the style arguments for the main content page.
 CONTENT_STYLE = {
-    'margin-left': '25%',
+    'margin-left': '20%',
     'margin-right': '5%',
     'padding': '20px 10p',
     'background-image': 'url(“assets/fondo3-1.png”)'

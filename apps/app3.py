@@ -77,7 +77,7 @@ SIDEBAR_STYLE = {
 
 # the style arguments for the main content page.
 CONTENT_STYLE = {
-    'margin-left': '25%',
+    'margin-left': '20%',
     'margin-right': '5%',
     'padding': '20px 10p',
     'background-image': 'url(“assets/fondo3-1.png”)'
@@ -122,6 +122,9 @@ content_fourth_row = dbc.Row(
     [
         dbc.Col(children=[
             html.H2(children='Casos Investigación por comuna de residencia'),
+            html.P(children='Cantidad de casos índices en proceso de investigación agrupados por comuna de residencia que se envían\
+                diariamente al Centro de Trazabilidad Los Héroes.'),
+            
             dcc.Graph(id='casos_inv_res'),
 
         dcc.Dropdown(
@@ -142,6 +145,8 @@ content_fourth_row = dbc.Row(
 
         dbc.Col(children=[
             html.H2(children='Casos Investigación por comuna de establecimiento'),
+            html.P(children='Cantidad de casos índices en proceso de investigación agrupados por comuna de establecimiento de seguimiento que se envían\
+                diariamente al Centro de Trazabilidad Los Héroes.'),
 
         dcc.Graph(id='casos_inv_estab'),
 
@@ -168,6 +173,8 @@ content_fifth_row = dbc.Row(
     [
         dbc.Col(children=[
             html.H2(children='Casos Seguimiento por comuna de residencia y previsión'),
+            html.P(children='Cantidad de casos índices en proceso de seguimiento agrupados por comuna de residencia y previsión que se envían\
+                diariamente al Centro de Trazabilidad Los Héroes.'),
             dcc.Graph(id='casos_seg_res'),
 
         dcc.Dropdown(
@@ -192,6 +199,8 @@ content_sixth_row = dbc.Row(
     [
         dbc.Col(children=[
             html.H2(children='Casos Investigacion por comuna de residencia y previsión'),
+            html.P(children='Cantidad de casos índices en proceso de seguimiento agrupados por comuna de establecimiento de seguimiento y previsión que se envían\
+                diariamente al Centro de Trazabilidad Los Héroes.'),
             dcc.Graph(id='casos_inv_res_prev'),
 
         dcc.Dropdown(

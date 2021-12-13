@@ -23,7 +23,7 @@ SIDEBAR_STYLE = {
 
 # the style arguments for the main content page.
 CONTENT_STYLE = {
-    'margin-left': '25%',
+    'margin-left': '20%',
     'margin-right': '5%',
     'padding': '20px 10p',
     'background-image': 'url(“assets/fondo3-1.png”)'
@@ -1549,12 +1549,13 @@ content_third_row_ind5 = dbc.Row(
 content_ind5 = html.Div(
     [
         html.Br(),
+        html.P(children='''Indicador 5: Oportunidad de la investigación epidemiológica y registro del primer seguimiento de casos: proporción de casos confirmados, en los cuales se inicia la investigación epidemiológica e
+identificación de contactos estrechos antes de 48 h.'''),
         content_second_row_ind5,
         content_third_row_ind5
         
     
-    ],
-    style=CONTENT_STYLE
+    ]
 )
 
 content_second_row_ind6 = dbc.Row(
@@ -1613,12 +1614,13 @@ content_third_row_ind6 = dbc.Row(
 content_ind6 = html.Div(
     [
         html.Br(),
+        html.P('''Indicador 6: Identificación de contactos: proporción de casos con al menos un contacto identificado.'''),
         content_second_row_ind6,
         content_third_row_ind6
         
     
     ],
-    style=CONTENT_STYLE
+    
 )
 
 content_second_row_ind7 = dbc.Row(
@@ -1677,11 +1679,13 @@ content_third_row_ind7 = dbc.Row(
 content_ind7 = html.Div(
     [
         html.Br(),
+        html.P('''Indicador 7: Oportunidad de la investigación epidemiológica y registro del primer seguimiento de en
+contactos: proporción de contactos nuevos en los cuales se inicia la investigación epidemiológica antes de 48 h.'''),
         content_second_row_ind7,
         content_third_row_ind7
         
     ],
-    style=CONTENT_STYLE
+    
 )
 
 tabs_styles = {
