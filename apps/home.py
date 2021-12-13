@@ -74,10 +74,14 @@ content = html.Div([
 
         dbc.Row([
         html.H1('<DASH - SALUD PUBLICA>'),
-        html.P(children='Página web con Gráficas y Tablas informativas alimentadas desde la Unidad de Inteligencia Sanitaria con data extraída desde el Github del Ministerio de Ciencias*\
-            y generada dentro de la misma unidad.'),
+        
+        html.P(children='''Términos y condiciones:
+
+Este sitio utiliza datos estadísticos conforme a datos generados en la Unidad de Inteligencia Sanitaria y la base de datos del Ministerio de Ciencia, Tecnología, Conocimiento e Innovación disponibles en https://github.com/MinCiencia/Datos-COVID19; que se basa en el “Informe Epidemiológico” y el “Reporte Diario” emitido por el Ministerio de Salud de Chile, conforme las normas disponibles en www.minsal.cl específicamente las dispuestas para datos de carácter estadístico; las que, en todo caso para estos efectos se rigen conforme la Ley Nº 19.628 sobre protección a la vida privada y sus respectivas modificaciones posteriores, en lo que corresponda.
+'''),
+        html.P(children='''Este sitio web informa datos de carácter estadístico, únicamente con la finalidad de generar visualizaciones a nivel de mapas, gráficos y tableros interactivos durante el contexto de las medidas que la autoridad sanitaria ha adoptado a propósito del estado de catástrofe, por calamidad pública ocasionado por el COVID-19, utilizando para ello información que no puede ser asociada a un titular identificado o identificable. (Art. 2 letra e), Ley Nº 19.628)'''),
         html.Br(),
-        html.P(children='*https://github.com/MinCiencia/Datos-COVID19') 
+       
         ]   
         )
     ],
