@@ -161,7 +161,7 @@ content = html.Div(
     style=CONTENT_STYLE
 )
 
-layout = html.Div([sidebar, content])
+layout = html.Div([sidebar, content,html.Footer(children='<Inteligencia Sanitaria>',style=TEXT_STYLE)])
 
 @app.callback(
     Output('table-paging-with-graph', "data"),

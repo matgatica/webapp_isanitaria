@@ -1716,16 +1716,17 @@ tabs=dbc.Tabs(
     style=tabs_styles
 )
 
-cuerpo=html.Div(dbc.Row(
+cuerpo=html.Div([dbc.Row(
     dbc.Col([
         html.H2('INDICADORES', style=TEXT_STYLE),
         html.H6('<Inteligencia Sanitaria>', style=TEXT_STYLE),
-        tabs
+        tabs,
     ])),
+    ],
     style=CONTENT_STYLE
     )
 
-layout = html.Div([sidebar, cuerpo])
+layout = html.Div([sidebar, cuerpo,html.Footer(children='<Inteligencia Sanitaria>',style=TEXT_STYLE)])
 
 
 @app.callback(
@@ -1773,7 +1774,8 @@ def update_geograph_5(value_ind):
         visible=False, resolution=110,
         showcountries=True, countrycolor="Black",
         scope="south america",
-        showsubunits=True, subunitcolor="Blue"
+        showsubunits=True, subunitcolor="Blue",
+        
     )
     fig6.update_layout(margin={'l': 0, 'b': 0, 't': 0, 'r': 0}, hovermode='closest')
 
