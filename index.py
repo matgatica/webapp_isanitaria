@@ -3,7 +3,7 @@ import dash
 from dash import html
 from dash.dependencies import Input, Output
 import dash_auth
-from apps import app1, app2, home, app3, app4, app5
+from apps import app1, centro_trazabilidad, indicadores, home, info_nacional, vacunas
 from app import app,server
 
 server=server
@@ -28,14 +28,14 @@ app.layout = html.Div([
 def display_page(pathname):
     if pathname == '/apps/app1':
         return app1.layout
-    elif pathname == '/apps/app2':
-        return app2.layout
-    elif pathname == '/apps/app3':
-        return app3.layout
-    elif pathname == '/apps/app4':
-        return app4.layout
-    elif pathname == '/apps/app5':
-        return app5.layout
+    elif pathname == '/apps/indicadores':
+        return indicadores.layout
+    elif pathname == '/apps/centro_trazabilidad':
+        return centro_trazabilidad.layout
+    elif pathname == '/apps/info_nacional':
+        return info_nacional.layout
+    elif pathname == '/apps/vacunas':
+        return vacunas.layout
     else:
         return home.layout
 
