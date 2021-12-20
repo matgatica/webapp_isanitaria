@@ -155,6 +155,12 @@ content = html.Div(
         html.H2('VACUNAS NACIONAL', style=TEXT_STYLE),
         html.H6('<Inteligencia Sanitaria>', style=TEXT_STYLE),
         html.Hr(),
+        html.P(children="""
+        Datos que corresponden a los vacunados en cada una de las comunas de Chile, según residencia y edad.
+        Estos datos provienen del Departamento de Estadísticas e Información Sanitaria (DEIS) del Ministerio de Salud del país.
+        El DEIS hace mejoras al registro de vacunación a medida que analiza diversas fuentes de datos.
+        Se entiende por comuna de residencia la comuna que se declaró la vivienda del paciente.
+        """),
         tabla_vacuna,   
         
     ],

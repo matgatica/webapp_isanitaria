@@ -109,8 +109,11 @@ content_pcr = dbc.Row(
     [
         
         html.H2(children='PCR NACIONAL'),
-        dcc.Graph(id='pcr_nacional'),
-
+        html.P(children="""Número de exámenes PCR realizados por región reportados diariamente por el Ministerio de Salud, desde el 09-04-2020.
+El proceso ocurre hasta la fecha de la siguiente manera: 1) Paciente va al médico 2) Médico identifica síntomas que constituyen caso sospechoso y ordena tomar muestras y realizar test PCR 3)
+Las muestras van al laboratorio para test PCR.
+        """),
+         dcc.Graph(id='pcr_nacional'),
         dcc.Dropdown(
             id='id_regiones_pcr',
             options=lista_regiones_pcr,
@@ -131,6 +134,10 @@ content_totales = dbc.Row(
     [
         
         html.H2(children='TOTALES NACIONAL'),
+        html.P(children="""Casos totales diarios confirmados por laboratorio en cada una de las regiones de Chile, según residencia, y concatena la información reportada por el Ministerio de Salud del país.
+        Se entiende por caso confirmado la persona que cumple con los criterios de definición de caso sospechoso con una muestra positiva de SARS-CoV-2.
+        Se entiende por región de residencia la región que la persona declara como su vivienda habitual.
+        """),
         dcc.Graph(id='totales_nacional'),
 
         dcc.Dropdown(
@@ -162,6 +169,11 @@ content_ventiladores = dbc.Row(
     [
         
         html.H2(children='VENTILADORES NACIONAL'),
+        html.P(children="""
+        Este producto da cuenta del número total de camas críticas en el Sistema Integrado Covid 19, el número de ventiladores disponibles y el número de ventiladores ocupados,
+        para cada fecha reportada. Se concatena la historia de los reportes diarios publicados por el Ministerio de Salud del país.
+        Se entiende por número total a todos los ventiladores operativos en el Sistema Integrado Covid 19.
+        """),
         dcc.Graph(id='ventiladores_nacional'),
 
         dcc.Dropdown(
@@ -184,6 +196,14 @@ content_residencias = dbc.Row(
     [
         
         html.H2(children='RESIDENCIAS NACIONAL'),
+        html.P(children="""
+        número de residencias sanitarias informadas por región. Se consideran las categorias: Número de habitaciones totales, Número de usuarios en la residencia y número de residencias habilitadas.
+        Este archivo concatena la historia de los reportes diarios publicados por el Ministerio de Salud del país.
+
+        Se entiende por residencia sanitaria a establecimientos acondicionados con habitaciones individuales, baños privados, servicios de alimentación y cuidados básicos que el Ministerio de Salud ha dispuesto.
+        Se orientan a personas confirmadas con COVID-19 sin requerimiento de hospitalización y que, por diversos factores, no cuentan con condiciones de habitabilidad apropiadas en sus domicilios particulares,
+        debiendo realizar aislamiento temporal en una residencia sanitaria dentro de su región.
+        """),
         dcc.Graph(id='residencias_nacional'),
 
         dcc.Dropdown(
