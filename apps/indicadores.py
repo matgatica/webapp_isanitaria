@@ -103,14 +103,7 @@ content_second_row_ind5 = dbc.Row(
             max=100,
             step=1,
             value=[5, 50],
-            marks={
-            1: '1',
-            10:'10',
-            20: '20',
-            30: '30',
-            40: '40',
-            50: '50'
-            }
+            marks={i: str(i) for i in range(51)}
         )]
 
         )
@@ -126,14 +119,7 @@ content_third_row_ind5 = dbc.Row(
         max=50,
         step=1,
         value=30,
-        marks={
-            1: '1',
-            10:'10',
-            20: '20',
-            30: '30',
-            40: '40',
-            50: '50'
-            }
+        marks={i: str(i) for i in range(51)}
         )]
 
         )
@@ -167,14 +153,7 @@ content_second_row_ind6 = dbc.Row(
             max=100,
             step=1,
             value=[5, 50],
-            marks={
-            1: '1',
-            10:'10',
-            20: '20',
-            30: '30',
-            40: '40',
-            50: '50'
-            }
+            marks={i: str(i) for i in range(51)}
         )]
 
         )
@@ -190,14 +169,7 @@ content_third_row_ind6 = dbc.Row(
         max=50,
         step=1,
         value=30,
-        marks={
-            1: '1',
-            10:'10',
-            20: '20',
-            30: '30',
-            40: '40',
-            50: '50'
-            }
+        marks={i: str(i) for i in range(51)}
         )]
 
         )
@@ -232,14 +204,7 @@ content_second_row_ind7 = dbc.Row(
             max=100,
             step=1,
             value=[5, 50],
-            marks={
-            1: '1',
-            10:'10',
-            20: '20',
-            30: '30',
-            40: '40',
-            50: '50'
-            }
+            marks={i: str(i) for i in range(51)}
         )]
 
         )
@@ -255,14 +220,7 @@ content_third_row_ind7 = dbc.Row(
         max=50,
         step=1,
         value=30,
-        marks={
-            1: '1',
-            10:'10',
-            20: '20',
-            30: '30',
-            40: '40',
-            50: '50'
-            }
+        marks={i: str(i) for i in range(51)}
         )]
 
         )
