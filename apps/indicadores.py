@@ -12,6 +12,7 @@ from epiweeks import Week
 from urllib.request import urlopen
 import json
 
+
 # the style arguments for the sidebar.
 SIDEBAR_STYLE = {
     'position': 'fixed',
@@ -357,7 +358,7 @@ def update_geograph_5(value_ind):
     dff['Indicador 5']=dff['Indicador 5'].astype(float)
 
     
-    fig6=px.choropleth_mapbox(df_indicadores, geojson=geojason, locations='Comuna', color='Indicador 5',
+    fig6=px.choropleth_mapbox(dff, geojson=geojason, locations='Comuna', color='Indicador 5',
                            #color_continuous_scale="Viridis",
                            range_color=(0, 1),
                            mapbox_style="carto-positron",
@@ -424,7 +425,7 @@ def update_geograph_6(value_ind):
     dff.fillna('0',inplace=True)
     dff['Indicador 6']=dff['Indicador 6'].astype(float)
 
-    fig6=px.choropleth_mapbox(df_indicadores, geojson=geojason, locations='Comuna', color='Indicador 6',
+    fig6=px.choropleth_mapbox(dff, geojson=geojason, locations='Comuna', color='Indicador 6',
                            #color_continuous_scale="Viridis",
                            range_color=(0, 1),
                            mapbox_style="carto-positron",
@@ -490,7 +491,7 @@ def update_geograph_7(value_ind):
     dff.fillna('0',inplace=True)
     dff['Indicador 7']=dff['Indicador 7'].astype(float)
 
-    fig6=px.choropleth_mapbox(df_indicadores, geojson=geojason, locations='Comuna', color='Indicador 7',
+    fig6=px.choropleth_mapbox(dff, geojson=geojason, locations='Comuna', color='Indicador 7',
                            #color_continuous_scale="Viridis",
                            range_color=(0, 1),
                            mapbox_style="carto-positron",
