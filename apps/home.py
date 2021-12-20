@@ -64,10 +64,10 @@ content = html.Div([
         html.Hr(),
 
         dbc.Row([dbc.Col(
-        html.Img(src='assets/logo-seremi-header.jpg',style={'height':'80%', 'width':'100%'}),
+        html.A([html.Img(src='assets/logo-seremi-header.jpg',style={'height':'80%', 'width':'100%'})],href="https://seremi13.redsalud.gob.cl/"),
         md=7),
         dbc.Col(
-        html.Img(src='assets/cropped-header-minsal_yo-me-vacuno_vertical.png',style={'height':'80%', 'width':'100%'}),
+        html.A([html.Img(src='assets/cropped-header-minsal_yo-me-vacuno_vertical.png',style={'height':'80%', 'width':'100%'})],href="https://mevacuno.gob.cl/"),
         md=3)]
 
         ),
