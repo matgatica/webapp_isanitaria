@@ -177,13 +177,15 @@ content = html.Div([
         html.Hr(),
 
         dbc.Row([dbc.Col(
-        html.A([html.Img(src='assets/logo-seremi-header.jpg',style={'height':'80%', 'width':'100%'})],href="https://seremi13.redsalud.gob.cl/"),
-        md=7),
+        html.A([html.Img(src='assets/SEREMISALUDMET.png',style={'height':'200px', 'width':'250px'})],href="https://seremi13.redsalud.gob.cl/"),
+        ),
         dbc.Col(
-        html.A([html.Img(src='assets/cropped-header-minsal_yo-me-vacuno_vertical.png',style={'height':'80%', 'width':'100%'})],href="https://mevacuno.gob.cl/"),
-        md=3)]
+        html.A([html.Img(src='assets/logo_ymv.png',style={'height':'150px', 'width':'250px'})],href="https://mevacuno.gob.cl/"),
+        )]
 
         ),
+
+        html.H1('CIFRAS REGION METROPOLITANA', style=TEXT_STYLE),
 
         dbc.Row([
             dbc.Col(dbc.Card(card_activos_confirmados, color="primary", inverse=True)),

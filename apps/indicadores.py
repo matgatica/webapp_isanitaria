@@ -327,6 +327,8 @@ def update_geograph_5(value_ind):
                            zoom=8,
                            opacity=0.3,
                            labels={'SE':'SE',
+                               'Indicador 5':'Indicador 5'},
+                            text={'SE':'SE',
                                'Indicador 5':'Indicador 5'}
                           )
 
