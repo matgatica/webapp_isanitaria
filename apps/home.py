@@ -33,7 +33,7 @@ fallecidos_totales=fallecidos_totales.loc[:,fallecidos_totales.columns[-1]].valu
 
 
 card_activos_confirmados = [
-    dbc.CardHeader("Región Metropolitana"),
+    dbc.CardHeader(f"Región Metropolitana  al {totales.columns[-1]}"),
     dbc.CardBody(
         [
             html.H5(f"Casos Activos Confirmados: {casos_activos_confirmados}", className="card-title"),
@@ -47,7 +47,7 @@ card_activos_confirmados = [
 ]
 
 card_activos_probables = [
-    dbc.CardHeader("Región Metropolitana"),
+    dbc.CardHeader(f"Región Metropolitana  al {totales.columns[-1]}"),
     dbc.CardBody(
         [
             html.H5(f"Casos Activos Probables: {casos_activos_probables}", className="card-title"),
@@ -61,7 +61,7 @@ card_activos_probables = [
 ]
 
 card_fallecidos_totales = [
-    dbc.CardHeader("Región Metropolitana"),
+    dbc.CardHeader(f"Región Metropolitana  al {totales.columns[-1]}"),
     dbc.CardBody(
         [
             html.H5(f"Fallecidos Totales: {fallecidos_totales}", className="card-title"),
@@ -75,7 +75,7 @@ card_fallecidos_totales = [
 ]
 
 card_nuevos_totales = [
-    dbc.CardHeader("Región Metropolitana"),
+    dbc.CardHeader(f"Región Metropolitana  al {totales.columns[-1]}"),
     dbc.CardBody(
         [
             html.H5(f"Casos Nuevos Totales: {casos_nuevos_totales}", className="card-title"),
@@ -89,7 +89,7 @@ card_nuevos_totales = [
 ]
 
 card_nuevos_con_sintomas = [
-    dbc.CardHeader("Región Metropolitana"),
+    dbc.CardHeader(f"Región Metropolitana  al {totales.columns[-1]}"),
     dbc.CardBody(
         [
             html.H5(f"Casos Nuevos con Sintomas: {casos_nuevos_con_sintomas}", className="card-title"),
@@ -103,7 +103,7 @@ card_nuevos_con_sintomas = [
 ]
 
 card_nuevos_sin_sintomas = [
-    dbc.CardHeader("Región Metropolitana"),
+    dbc.CardHeader(f"Región Metropolitana  al {totales.columns[-1]}"),
     dbc.CardBody(
         [
             html.H5(f"Casos Nuevos sin Sintomas: {casos_nuevos_sin_sintomas}", className="card-title"),
