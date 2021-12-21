@@ -2,6 +2,119 @@ import dash_bootstrap_components as dbc
 from dash import html
 from dash import dcc
 from app import app
+import pandas as pd
+
+totales=pd.read_csv("https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto3/TotalesPorRegion.csv")
+
+casos_activos_confirmados=totales.loc[(totales["Region"]=="Metropolitana")&(totales["Categoria"]=="Casos activos confirmados")]
+casos_activos_confirmados=casos_activos_confirmados.loc[:,casos_activos_confirmados.columns[-1]].values[0]
+
+casos_activos_probables=totales.loc[(totales["Region"]=="Metropolitana")&(totales["Categoria"]=="Casos activos probables")]
+casos_activos_probables=casos_activos_probables.loc[:,casos_activos_probables.columns[-1]].values[0]
+
+casos_nuevos_totales=totales.loc[(totales["Region"]=="Metropolitana")&(totales["Categoria"]=="Casos nuevos totales")]
+casos_nuevos_totales=casos_nuevos_totales.loc[:,casos_nuevos_totales.columns[-1]].values[0]
+
+casos_nuevos_con_sintomas=totales.loc[(totales["Region"]=="Metropolitana")&(totales["Categoria"]=="Casos nuevos con sintomas")]
+casos_nuevos_con_sintomas=casos_nuevos_con_sintomas.loc[:,casos_nuevos_con_sintomas.columns[-1]].values[0]
+
+casos_nuevos_sin_sintomas=totales.loc[(totales["Region"]=="Metropolitana")&(totales["Categoria"]=="Casos nuevos sin sintomas")]
+casos_nuevos_sin_sintomas=casos_nuevos_sin_sintomas.loc[:,casos_nuevos_sin_sintomas.columns[-1]].values[0]
+
+casos_nuevos_nose_sintomas=casos_nuevos_totales-casos_nuevos_con_sintomas-casos_nuevos_sin_sintomas
+
+casos_nuevos_antigeno=totales.loc[(totales["Region"]=="Metropolitana")&(totales["Categoria"]=="Casos nuevos confirmados por antigeno")]
+casos_nuevos_antigeno=casos_nuevos_antigeno.loc[:,casos_nuevos_antigeno.columns[-1]].values[0]
+
+fallecidos_totales=totales.loc[(totales["Region"]=="Metropolitana")&(totales["Categoria"]=="Fallecidos totales")]
+fallecidos_totales=fallecidos_totales.loc[:,fallecidos_totales.columns[-1]].values[0]
+
+
+
+
+card_activos_confirmados = [
+    dbc.CardHeader("Región Metropolitana"),
+    dbc.CardBody(
+        [
+            html.H5(f"Casos Activos Confirmados: {casos_activos_confirmados}", className="card-title"),
+            html.P(
+                "Fuente: Ministerio de Salud. Ver en: https://www.minsal.cl/nuevo-coronavirus-2019-ncov/casos-confirmados-en-chile-covid-19/",
+                className="card-text",
+                style={"fontSize":12}
+            ),
+        ]
+    ),
+]
+
+card_activos_probables = [
+    dbc.CardHeader("Región Metropolitana"),
+    dbc.CardBody(
+        [
+            html.H5(f"Casos Activos Probables: {casos_activos_probables}", className="card-title"),
+            html.P(
+                "Fuente: Ministerio de Salud. Ver en: https://www.minsal.cl/nuevo-coronavirus-2019-ncov/casos-confirmados-en-chile-covid-19/",
+                className="card-text",
+                style={"fontSize":12}
+            ),
+        ]
+    ),
+]
+
+card_fallecidos_totales = [
+    dbc.CardHeader("Región Metropolitana"),
+    dbc.CardBody(
+        [
+            html.H5(f"Fallecidos Totales: {fallecidos_totales}", className="card-title"),
+            html.P(
+                "Fuente: Ministerio de Salud. Ver en: https://www.minsal.cl/nuevo-coronavirus-2019-ncov/casos-confirmados-en-chile-covid-19/",
+                className="card-text",
+                style={"fontSize":12}
+            ),
+        ]
+    ),
+]
+
+card_nuevos_totales = [
+    dbc.CardHeader("Región Metropolitana"),
+    dbc.CardBody(
+        [
+            html.H5(f"Casos Nuevos Totales: {casos_nuevos_totales}", className="card-title"),
+            html.P(
+                "Fuente: Ministerio de Salud. Ver en: https://www.minsal.cl/nuevo-coronavirus-2019-ncov/casos-confirmados-en-chile-covid-19/",
+                className="card-text",
+                style={"fontSize":12}
+            ),
+        ]
+    ),
+]
+
+card_nuevos_con_sintomas = [
+    dbc.CardHeader("Región Metropolitana"),
+    dbc.CardBody(
+        [
+            html.H5(f"Casos Nuevos con Sintomas: {casos_nuevos_con_sintomas}", className="card-title"),
+            html.P(
+                "Fuente: Ministerio de Salud. Ver en: https://www.minsal.cl/nuevo-coronavirus-2019-ncov/casos-confirmados-en-chile-covid-19/",
+                className="card-text",
+                style={"fontSize":12}
+            ),
+        ]
+    ),
+]
+
+card_nuevos_sin_sintomas = [
+    dbc.CardHeader("Región Metropolitana"),
+    dbc.CardBody(
+        [
+            html.H5(f"Casos Nuevos sin Sintomas: {casos_nuevos_sin_sintomas}", className="card-title"),
+            html.P(
+                "Fuente: Ministerio de Salud. Ver en: https://www.minsal.cl/nuevo-coronavirus-2019-ncov/casos-confirmados-en-chile-covid-19/",
+                className="card-text",
+                style={"fontSize":12}
+            ),
+        ]
+    ),
+]
 
 # the style arguments for the sidebar.
 SIDEBAR_STYLE = {
@@ -71,6 +184,24 @@ content = html.Div([
         md=3)]
 
         ),
+
+        dbc.Row([
+            dbc.Col(dbc.Card(card_activos_confirmados, color="primary", inverse=True)),
+            dbc.Col(dbc.Card(card_activos_probables, color="primary", inverse=True)),
+            dbc.Col(dbc.Card(card_fallecidos_totales, color="primary", inverse=True)),
+        ],
+        className="mb-4"
+        ),
+        dbc.Row([
+            dbc.Col(dbc.Card(card_nuevos_totales, color="primary", inverse=True)),
+            dbc.Col(dbc.Card(card_nuevos_con_sintomas, color="primary", inverse=True)),
+            dbc.Col(dbc.Card(card_nuevos_sin_sintomas, color="primary", inverse=True)),
+            
+        ],
+        className="mb-4"
+        ),
+
+
 
         dbc.Row([
         html.H1('<DASH - SALUD PUBLICA>'),

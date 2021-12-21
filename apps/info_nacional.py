@@ -29,6 +29,7 @@ for i in totales_por_region.Categoria.unique():
     lista_categorias_totales.append(mini_dict)
 
 
+
 ventiladores=pd.read_csv("DATA/ventiladores_nacional.csv",sep=',').drop(columns=["Unnamed: 0"])
 ventiladores_unpivoted = ventiladores.melt(id_vars=['Ventiladores'], var_name='date', value_name='cuenta')
 lista_ventiladores=[
