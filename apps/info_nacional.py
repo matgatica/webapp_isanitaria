@@ -126,7 +126,7 @@ Las muestras van al laboratorio para test PCR.
             min_date_allowed=date(1995, 8, 5),
             max_date_allowed=date(2022, 1, 1),
             initial_visible_month=date(2020, 6, 1),
-            end_date=date(2021, 12 , 1),
+            end_date=date.today(),
             start_date=date(2020, 6, 1)
         )]
         )
@@ -158,7 +158,7 @@ content_totales = dbc.Row(
             min_date_allowed=date(1995, 8, 5),
             max_date_allowed=date(2022, 1, 1),
             initial_visible_month=date(2020, 6, 1),
-            end_date=date(2021, 12 , 1),
+            end_date=date.today(),
             start_date=date(2020, 6, 1)
         )]
         )
@@ -188,7 +188,7 @@ content_ventiladores = dbc.Row(
             min_date_allowed=date(1995, 8, 5),
             max_date_allowed=date(2022, 1, 1),
             initial_visible_month=date(2021, 1, 1),
-            end_date=date(2021, 12 , 1),
+            end_date=date.today(),
             start_date=date(2021, 1, 1)
         )]
         )
@@ -225,7 +225,7 @@ content_residencias = dbc.Row(
             min_date_allowed=date(1995, 8, 5),
             max_date_allowed=date(2022, 1, 1),
             initial_visible_month=date(2021, 1, 1),
-            end_date=date(2021, 12 , 1),
+            end_date=date.today(),
             start_date=date(2021, 1, 1)
 
         )]

@@ -138,7 +138,7 @@ content_fourth_row = dbc.Row(
             min_date_allowed=date(1995, 8, 5),
             max_date_allowed=date(2022, 1, 1),
             initial_visible_month=date(2021, 11, 1),
-            end_date=date(2021, 11 ,15),
+            end_date=date.today(),
             start_date=date(2021, 11, 1)
         )],md=6
         ),
@@ -161,7 +161,7 @@ content_fourth_row = dbc.Row(
             min_date_allowed=date(1995, 8, 5),
             max_date_allowed=date(2022, 1, 1),
             initial_visible_month=date(2021, 11, 1),
-            end_date=date(2021, 11 ,15),
+            end_date=date.today(),
             start_date=date(2021, 11, 1)
         )
         ],md=6)
@@ -188,7 +188,7 @@ content_fifth_row = dbc.Row(
             min_date_allowed=date(1995, 8, 5),
             max_date_allowed=date(2022, 1, 1),
             initial_visible_month=date(2021, 11, 1),
-            end_date=date(2021, 11 ,15),
+            end_date=date.today(),
             start_date=date(2021, 11, 1)
         )]
         )
@@ -214,7 +214,7 @@ content_sixth_row = dbc.Row(
             min_date_allowed=date(1995, 8, 5),
             max_date_allowed=date(2022, 1, 1),
             initial_visible_month=date(2021, 11, 1),
-            end_date=date(2021, 11 ,15),
+            end_date=date.today(),
             start_date=date(2021, 11, 1)
         )]
         )

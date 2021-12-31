@@ -100,10 +100,10 @@ content_second_row_ind5 = dbc.Row(
         dcc.RangeSlider(
             id='slider_ind5',
             min=0,
-            max=100,
+            max=60,
             step=1,
-            value=[5, 50],
-            marks={i: str(i) for i in range(51)}
+            value=[5, 60],
+            marks={i: str(i) for i in range(61)}
         )]
 
         )
@@ -116,10 +116,10 @@ content_third_row_ind5 = dbc.Row(
         dcc.Slider(
         id='slider_SE_5',
         min=0,
-        max=50,
+        max=60,
         step=1,
         value=30,
-        marks={i: str(i) for i in range(51)}
+        marks={i: str(i) for i in range(61)}
         )]
 
         )
@@ -150,10 +150,10 @@ content_second_row_ind6 = dbc.Row(
         dcc.RangeSlider(
             id='slider_ind6',
             min=0,
-            max=100,
+            max=60,
             step=1,
-            value=[5, 50],
-            marks={i: str(i) for i in range(51)}
+            value=[5, 60],
+            marks={i: str(i) for i in range(61)}
         )]
 
         )
@@ -166,10 +166,10 @@ content_third_row_ind6 = dbc.Row(
         dcc.Slider(
         id='slider_SE_6',
         min=0,
-        max=50,
+        max=60,
         step=1,
         value=30,
-        marks={i: str(i) for i in range(51)}
+        marks={i: str(i) for i in range(61)}
         )]
 
         )
@@ -201,10 +201,10 @@ content_second_row_ind7 = dbc.Row(
         dcc.RangeSlider(
             id='slider_ind_7',
             min=0,
-            max=100,
+            max=60,
             step=1,
-            value=[5, 50],
-            marks={i: str(i) for i in range(51)}
+            value=[5, 60],
+            marks={i: str(i) for i in range(61)}
         )]
 
         )
