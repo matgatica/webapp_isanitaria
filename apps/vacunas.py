@@ -23,13 +23,13 @@ SIDEBAR_STYLE = {
     'top': 0,
     'left': 0,
     'bottom': 0,
-    'width': '20%',
+    'width': '15%',
     'padding': '20px 10px',
 }
 
 # the style arguments for the main content page.
 CONTENT_STYLE = {
-    'margin-left': '20%',
+    'margin-left': '15%',
     'margin-right': '5%',
     'padding': '20px 10p',
     'background-image': 'url(“assets/fondo3-1.png”)'
@@ -48,15 +48,15 @@ CARD_TEXT_STYLE = {
 controls = dbc.Form(
     [
         html.Br(),
-        dcc.Link(dbc.Button("Go To Trazabilidad", color="danger", className="d-grid gap-2 col-6 mx-auto",size='lg'), href='/apps/centro_trazabilidad'),
+        dcc.Link(dbc.Button("Trazabilidad", color="danger", className="d-grid gap-2 col-6 mx-auto",size='lg'), href='/apps/centro_trazabilidad'),
         html.Br(),
-        dcc.Link(dbc.Button("Go To Indicadores", color="danger", className="d-grid gap-2 col-6 mx-auto",size='lg'), href='/apps/indicadores'),
+        dcc.Link(dbc.Button("Indicadores", color="danger", className="d-grid gap-2 col-6 mx-auto",size='lg'), href='/apps/indicadores'),
         html.Br(),
-        dcc.Link(dbc.Button("Go To Info Nacional", color="danger", className="d-grid gap-2 col-6 mx-auto",size='lg'), href='/apps/info_nacional'),
+        dcc.Link(dbc.Button("Info Nacional", color="danger", className="d-grid gap-2 col-6 mx-auto",size='lg'), href='/apps/info_nacional'),
         html.Br(),
-        dcc.Link(dbc.Button("Go To Vacunas Nacional", color="danger", className="d-grid gap-2 col-6 mx-auto",size='lg'), href='/apps/vacunas'),
+        dcc.Link(dbc.Button("Vacunas Nacional", color="danger", className="d-grid gap-2 col-6 mx-auto",size='lg'), href='/apps/vacunas'),
         html.Br(),
-        dcc.Link(dbc.Button("Go To Home", color="danger", className="d-grid gap-2 col-6 mx-auto",size='lg'), href='/')    
+        dcc.Link(dbc.Button("Home", color="danger", className="d-grid gap-2 col-6 mx-auto",size='lg'), href='/')    
     ]
 )
 
@@ -167,8 +167,13 @@ content = html.Div(
     style=CONTENT_STYLE
 )
 
-layout = html.Div([sidebar, content,html.Footer(children='<Inteligencia Sanitaria>',style=TEXT_STYLE)])
-
+layout = html.Div([sidebar, content,html.Footer(
+    children=[
+        dbc.Row([
+    html.A(html.Img(src='assets/paso-a-paso-logo.png'),style={'textAlign': 'center'})])
+    ],className="mb-4")
+    
+    ])
 @app.callback(
     Output('table-paging-with-graph', "data"),
     Input('table-paging-with-graph', "page_current"),

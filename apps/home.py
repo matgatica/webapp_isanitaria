@@ -122,14 +122,14 @@ SIDEBAR_STYLE = {
     'top': 0,
     'left': 0,
     'bottom': 0,
-    'width': '20%',
+    'width': '15%',
     'padding': '20px 10px'
     
 }
 
 # the style arguments for the main content page.
 CONTENT_STYLE = {
-    'margin-left': '20%',
+    'margin-left': '15%',
     'margin-right': '5%',
     'padding': '20px 10p',
     'background-image': 'url(“assets/fondo3-1.png”)'
@@ -148,15 +148,15 @@ CARD_TEXT_STYLE = {
 controls = dbc.Form(
     [
         html.Br(),
-        dcc.Link(dbc.Button("Go To Trazabilidad", color="danger", className="d-grid gap-2 col-6 mx-auto",size='lg'), href='/apps/centro_trazabilidad'),
+        dcc.Link(dbc.Button("Trazabilidad", color="danger", className="d-grid gap-2 col-6 mx-auto",size='lg'), href='/apps/centro_trazabilidad'),
         html.Br(),
-        dcc.Link(dbc.Button("Go To Indicadores", color="danger", className="d-grid gap-2 col-6 mx-auto",size='lg'), href='/apps/indicadores'),
+        dcc.Link(dbc.Button("Indicadores", color="danger", className="d-grid gap-2 col-6 mx-auto",size='lg'), href='/apps/indicadores'),
         html.Br(),
-        dcc.Link(dbc.Button("Go To Info Nacional", color="danger", className="d-grid gap-2 col-6 mx-auto",size='lg'), href='/apps/info_nacional'),
+        dcc.Link(dbc.Button("Info Nacional", color="danger", className="d-grid gap-2 col-6 mx-auto",size='lg'), href='/apps/info_nacional'),
         html.Br(),
-        dcc.Link(dbc.Button("Go To Vacunas Nacional", color="danger", className="d-grid gap-2 col-6 mx-auto",size='lg'), href='/apps/vacunas'),
+        dcc.Link(dbc.Button("Vacunas Nacional", color="danger", className="d-grid gap-2 col-6 mx-auto",size='lg'), href='/apps/vacunas'),
         html.Br(),
-        dcc.Link(dbc.Button("Go To Home", color="danger", className="d-grid gap-2 col-6 mx-auto",size='lg'), href='/')    
+        dcc.Link(dbc.Button("Home", color="danger", className="d-grid gap-2 col-6 mx-auto",size='lg'), href='/')    
     ]
 )
 
@@ -213,7 +213,7 @@ content = html.Div([
 Este sitio utiliza datos estadísticos conforme a datos generados en la Unidad de Inteligencia Sanitaria y la base de datos del Ministerio de Ciencia, Tecnología, Conocimiento e Innovación disponibles en https://github.com/MinCiencia/Datos-COVID19; que se basa en el “Informe Epidemiológico” y el “Reporte Diario” emitido por el Ministerio de Salud de Chile, conforme las normas disponibles en www.minsal.cl específicamente las dispuestas para datos de carácter estadístico; las que, en todo caso para estos efectos se rigen conforme la Ley Nº 19.628 sobre protección a la vida privada y sus respectivas modificaciones posteriores, en lo que corresponda.
 '''),
         html.P(children='''Este sitio web informa datos de carácter estadístico, únicamente con la finalidad de generar visualizaciones a nivel de mapas, gráficos y tableros interactivos durante el contexto de las medidas que la autoridad sanitaria ha adoptado a propósito del estado de catástrofe, por calamidad pública ocasionado por el COVID-19, utilizando para ello información que no puede ser asociada a un titular identificado o identificable. (Art. 2 letra e), Ley Nº 19.628)'''),
-        html.Footer(children='<Inteligencia Sanitaria>'),
+        
        
         ]   
         )
@@ -221,4 +221,10 @@ Este sitio utiliza datos estadísticos conforme a datos generados en la Unidad d
     style=CONTENT_STYLE
 )
 
-layout = html.Div([sidebar, content])
+layout = html.Div([sidebar, content,html.Footer(
+    children=[
+        dbc.Row([
+    html.A(html.Img(src='assets/paso-a-paso-logo.png'),style={'textAlign': 'center'})])
+    ],className="mb-4")
+    
+    ])
