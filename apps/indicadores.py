@@ -267,7 +267,12 @@ tabs=dbc.Tabs(
     [
         dbc.Tab(content_ind5, label="INDICADOR 5",style=tab_style, active_tab_style=tab_selected_style,tabClassName="flex-grow-1 text-center"),
         dbc.Tab(content_ind6, label="INDICADOR 6",style=tab_style, active_tab_style=tab_selected_style,tabClassName="flex-grow-1 text-center"),   
-        dbc.Tab(content_ind7, label="INDICADOR 7",style=tab_style, active_tab_style=tab_selected_style,tabClassName="flex-grow-1 text-center"),   
+        dbc.Tab(content_ind7, label="INDICADOR 7",style=tab_style, active_tab_style=tab_selected_style,tabClassName="flex-grow-1 text-center"),
+        dbc.Tab([
+            html.Br(),
+            html.Iframe(style={"width":"1800px", "height":"1000px","frameborder":"5","allowFullScreen":"true"}, src="https://app.powerbi.com/view?r=eyJrIjoiN2NhNzU4MTQtMzgyYy00YzJkLWJlOTQtNGQxMTU2N2RkZmIxIiwidCI6IjU2NTgyYjllLTg4MjQtNDlkMC1hNjY1LWNkMzI4YzBlMDA0YSIsImMiOjR9&pageName=ReportSectione99c21df3ff1385073de"),
+            ],
+        label="POWERBI",style=tab_style, active_tab_style=tab_selected_style,tabClassName="flex-grow-1 text-center"),
     ],
     style=tabs_styles
 )

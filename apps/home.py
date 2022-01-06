@@ -186,6 +186,7 @@ content = html.Div([
         ),
 
         html.H1('CIFRAS REGION METROPOLITANA', style=TEXT_STYLE),
+        
 
         dbc.Row([
             dbc.Col(dbc.Card(card_activos_confirmados, color="primary", inverse=True)),
