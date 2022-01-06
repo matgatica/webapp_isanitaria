@@ -77,7 +77,8 @@ df_indicadores=pd.read_excel("DATA/df_resumendata.xlsx").drop(columns=["Unnamed:
 
 
 df_indicadores["fecha"]=pd.to_datetime(df_indicadores["source"].str[:20].str[12:],format='%Y%m%d')
-df_indicadores["SE"]=df_indicadores["fecha"].apply(lambda x: Week.fromdate(x, system="iso").week)
+df_indicadores["SE"]=df_indicadores["fecha"].apply(lambda x: str(x.year)+str(Week.fromdate(x, system="iso").week) if len(str(Week.fromdate(x, system="iso").week))>1 else 
+                                                str(x.year)+"0"+str(Week.fromdate(x, system="iso").week))
 
 
 lista_comunas_ind=[]
@@ -85,42 +86,49 @@ for i in df_indicadores.Comuna.unique():
     mini_dict={'label':f'{i}',"value":f"{i}"}
     lista_comunas_ind.append(mini_dict)
 
+lista_SE_ind=[]
+for i in df_indicadores.SE.unique():
+    mini_dict={'label':f'{i}',"value":f"{i}"}
+    lista_SE_ind.append(mini_dict)
+
 
 content_second_row_ind5 = dbc.Row(
     [
-        
-            dcc.Graph(id='graph_indicador_5'),
-
         dcc.Dropdown(
             id='id_comuna_ind5',
             options=lista_comunas_ind,
             value=['Santiago'],
             multi=True     
         ),
+        dcc.Graph(id='graph_indicador_5'),
+
         dcc.RangeSlider(
             id='slider_ind5',
-            min=0,
-            max=60,
-            step=1,
-            value=[5, 60],
-            marks={i: str(i) for i in range(61)}
-        )]
+            min=202122,
+            max=202201,
+            #step=1,
+            value=[202122,202201],
+            #marks={i: i for i in df_indicadores["SE"].unique()},
+            tooltip={"placement": "bottom", "always_visible": True}
+        )
+        ]
 
         )
         
 
 content_third_row_ind5 = dbc.Row(
     [
-            dcc.Graph(id="geograph_indicador_5"),
+        html.H2('Mapa de Calor', style=TEXT_STYLE),
 
-        dcc.Slider(
+        dcc.Graph(id="geograph_indicador_5"),
+
+        dcc.Dropdown(
         id='slider_SE_5',
-        min=0,
-        max=60,
-        step=1,
-        value=30,
-        marks={i: str(i) for i in range(61)}
-        )]
+        options=lista_SE_ind,
+        value=202122
+        
+        )
+    ]
 
         )
 
@@ -138,39 +146,38 @@ identificación de contactos estrechos antes de 48 h.'''),
 
 content_second_row_ind6 = dbc.Row(
     [
-        
-            dcc.Graph(id='graph_indicador_6'),
-
         dcc.Dropdown(
             id='id_comuna_ind6',
             options=lista_comunas_ind,
             value=['Santiago'],
             multi=True     
         ),
+
+        dcc.Graph(id='graph_indicador_6'),
+
         dcc.RangeSlider(
             id='slider_ind6',
-            min=0,
-            max=60,
-            step=1,
-            value=[5, 60],
-            marks={i: str(i) for i in range(61)}
+            min=202122,
+            max=202201,
+            #step=1,
+            value=[202122,202201],
+            #marks={i: i for i in df_indicadores["SE"].unique()},
+            tooltip={"placement": "bottom", "always_visible": True}
         )]
 
         )
         
 content_third_row_ind6 = dbc.Row(
     [
+        html.H2('Mapa de Calor', style=TEXT_STYLE),
         
         dcc.Graph(id="geograph_indicador_6"),
 
-        dcc.Slider(
+        dcc.Dropdown(
         id='slider_SE_6',
-        min=0,
-        max=60,
-        step=1,
-        value=30,
-        marks={i: str(i) for i in range(61)}
-        )]
+        options=lista_SE_ind,
+        value=202122)
+    ]
 
         )
         
@@ -189,39 +196,38 @@ content_ind6 = html.Div(
 
 content_second_row_ind7 = dbc.Row(
     [
-        
-            dcc.Graph(id='graph_indicador_7'),
-
         dcc.Dropdown(
             id='id_comuna_ind_7',
             options=lista_comunas_ind,
             value=['Santiago'],
             multi=True     
         ),
+        
+        dcc.Graph(id='graph_indicador_7'),
+
         dcc.RangeSlider(
-            id='slider_ind_7',
-            min=0,
-            max=60,
-            step=1,
-            value=[5, 60],
-            marks={i: str(i) for i in range(61)}
+            id='slider_ind7',
+            min=202122,
+            max=202201,
+            #step=1,
+            value=[202122,202201],
+            #marks={i: i for i in df_indicadores["SE"].unique()},
+            tooltip={"placement": "bottom", "always_visible": True}
         )]
 
         )
         
 content_third_row_ind7 = dbc.Row(
     [
-        
+        html.H2('Mapa de Calor', style=TEXT_STYLE),
+
         dcc.Graph(id="geograph_indicador_7"),
 
-        dcc.Slider(
+        dcc.Dropdown(
         id='slider_SE_7',
-        min=0,
-        max=50,
-        step=1,
-        value=30,
-        marks={i: str(i) for i in range(51)}
-        )]
+        options=lista_SE_ind,
+        value=202122)
+        ]
 
         )
         
@@ -297,7 +303,7 @@ def update_graph_5(value_comuna,value_ind):
 
     df=df_indicadores
     df=df[df.Comuna.isin(value_comuna)]
-    dff = df[(df.SE>=value_ind[0])&(df.SE<=value_ind[1])]
+    dff = df[(df.SE>=str(value_ind[0]))&(df.SE<=str(value_ind[1]))]
     fig5 = px.line(dff,x='SE',y='Indicador 5',color='Comuna',template='plotly_dark')
     fig5.update_layout(margin={'l': 40, 'b': 40, 't': 10, 'r': 0}, hovermode='closest')
 
@@ -315,7 +321,7 @@ def update_graph_5(value_comuna,value_ind):
 def update_geograph_5(value_ind):
     df=df_indicadores
 
-    dff = df[(df.SE==value_ind)]
+    dff = df[(df.SE==str(value_ind))]
     dff = dff[(dff.Comuna!='Total')]
     dff.fillna('0',inplace=True)
     dff['Indicador 5']=dff['Indicador 5'].astype(float)
@@ -364,7 +370,7 @@ def update_graph_6(value_comuna,value_ind):
 
     df=df_indicadores
     df=df[df.Comuna.isin(value_comuna)]
-    dff = df[(df.SE>=value_ind[0])&(df.SE<=value_ind[1])]
+    dff = df[(df.SE>=str(value_ind[0]))&(df.SE<=str(value_ind[1]))]
     fig5 = px.line(dff,x='SE',y='Indicador 6',color='Comuna',template='plotly_dark')
     fig5.update_layout(margin={'l': 40, 'b': 40, 't': 10, 'r': 0}, hovermode='closest')
 
@@ -383,7 +389,7 @@ def update_geograph_6(value_ind):
 
     df=df_indicadores
 
-    dff = df[(df.SE==value_ind)]
+    dff = df[(df.SE==str(value_ind))]
     dff = dff[(dff.Comuna!='Total')]
     dff.fillna('0',inplace=True)
     dff['Indicador 6']=dff['Indicador 6'].astype(float)
@@ -421,7 +427,7 @@ def update_geograph_6(value_ind):
     Output('graph_indicador_7', 'figure'),
     [
     Input('id_comuna_ind_7', 'value'),
-    Input('slider_ind_7', 'value'),
+    Input('slider_ind7', 'value'),
     
     ]
 )
@@ -430,7 +436,7 @@ def update_graph_7(value_comuna,value_ind):
 
     df=df_indicadores
     df=df[df.Comuna.isin(value_comuna)]
-    dff = df[(df.SE>=value_ind[0])&(df.SE<=value_ind[1])]
+    dff = df[(df.SE>=str(value_ind[0]))&(df.SE<=str(value_ind[1]))]
     fig7 = px.line(dff,x='SE',y='Indicador 7',color='Comuna',template='plotly_dark')
     fig7.update_layout(margin={'l': 40, 'b': 40, 't': 10, 'r': 0}, hovermode='closest')
 
@@ -449,7 +455,7 @@ def update_geograph_7(value_ind):
 
     df=df_indicadores
 
-    dff = df[(df.SE==value_ind)]
+    dff = df[(df.SE==str(value_ind))]
     dff = dff[(dff.Comuna!='Total')]
     dff.fillna('0',inplace=True)
     dff['Indicador 7']=dff['Indicador 7'].astype(float)
